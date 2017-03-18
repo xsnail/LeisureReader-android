@@ -1,0 +1,49 @@
+apply plugin: 'com.android.application'
+apply plugin: 'android-apt'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
+    defaultConfig {
+        applicationId "com.xsnail.leisurereader"
+        minSdkVersion 15
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:appcompat-v7:25.0.1'
+    compile 'com.android.support:design:25.0.1'
+    //组件
+    compile 'com.ashokvarma.android:bottom-navigation-bar:1.3.1'
+    compile 'com.miguelcatalan:materialsearchview:1.4.0'
+    //图片加载
+    compile "com.facebook.fresco:fresco:${frescoVersion}"
+    compile "com.facebook.fresco:animated-gif:${frescoVersion}"
+    //依赖注入
+    compile "com.google.dagger:dagger:${daggerVersion}"
+    apt "com.google.dagger:dagger-compiler:${daggerVersion}"
+    compile "com.jakewharton:butterknife:${butterknifeVersion}"
+    apt "com.jakewharton:butterknife-compiler:${butterknifeVersion}"
+    //RxJava & RxAndroid
+    compile "io.reactivex:rxjava:${rxjavaVersion}"
+    compile "io.reactivex:rxandroid:${rxjavaVersion}"
+    //retrofit
+    compile "com.squareup.retrofit2:retrofit:${retrofitVersion}"
+    compile "com.squareup.retrofit2:converter-gson:${retrofitVersion}"
+    compile ("com.squareup.retrofit2:adapter-rxjava:${retrofitVersion}"){
+        exclude module: 'rxjava'
+    }
+    //retrofit log
+    compile 'com.squareup.okhttp3:logging-interceptor:3.4.1'
+}

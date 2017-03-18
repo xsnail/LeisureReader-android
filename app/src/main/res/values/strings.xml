@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">闲读</string>
+    <string name="wifi_transfer">Wifi传书</string>
+    <string name="scan_local">导入本地书籍</string>
+    <string name="about_me">关于我</string>
+    <string name="logout">退出登录</string>
+    <string name="info_others">其它</string>
+    <string name="sync_shelf">同步书架</string>
+    <string name="setting">设置</string>
+    <string name="search_hint">寻找你喜欢的书籍...</string>
+    <string name="navigation_drawer_open">Open navigation</string>
+    <string name="navigation_drawer_close">Close navigation</string>
+    <string name="info_username">xsnail</string>
+    <string name="tag_shelf">书架</string>
+    <string name="tag_books">书城</string>
+    <string name="tag_community">社区</string>
+    
+</resources>
