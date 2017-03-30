@@ -6,7 +6,8 @@ package com.xsnail.leisurereader.base;
 
 public interface BaseContract {
     interface BaseView{
-
+        void showError();
+        void complete();
     }
 
     interface BasePresenter<T>{

@@ -24,8 +24,8 @@ public final class HeaderInterceptor implements Interceptor {
                 original.url().toString().contains("post/")||
                 original.url().toString().contains("user/")){
             Request request = original.newBuilder()
-                    .addHeader("User-Agent","ZhuiShuShenQi/3.40[preload=false;locale=zh_CN;clientidbase=android-nvidia]")
-                    .addHeader("X-User-Agent", "ZhuiShuShenQi/3.40[preload=false;locale=zh_CN;clientidbase=android-nvidia]")
+                    .addHeader("LoginResult-Agent","ZhuiShuShenQi/3.40[preload=false;locale=zh_CN;clientidbase=android-nvidia]")
+                    .addHeader("X-LoginResult-Agent", "ZhuiShuShenQi/3.40[preload=false;locale=zh_CN;clientidbase=android-nvidia]")
                     .addHeader("X-Device-Id", DeviceUtils.getIMEI(App.getInstance()))
                     .addHeader("Host","api.zhuishushenqi.com")
                     .addHeader("Connection","Keep-Alive")

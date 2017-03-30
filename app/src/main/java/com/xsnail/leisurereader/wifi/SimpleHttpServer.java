@@ -1,7 +1,6 @@
 package com.xsnail.leisurereader.wifi;
 
 
-import com.xsnail.leisurereader.data.config.AppConfig;
 import com.xsnail.leisurereader.utils.LogUtils;
 import com.xsnail.leisurereader.utils.StreamUtils;
 

@@ -12,4 +12,6 @@ public interface ApiConfig {
 
     String BASE_URL = "http://api.zhuishushenqi.com";
 
+    String MY_BASE_URL = "http://10.0.2.2:8080";
+
 }

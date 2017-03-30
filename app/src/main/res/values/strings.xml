@@ -14,5 +14,43 @@
     <string name="tag_shelf">书架</string>
     <string name="tag_books">书城</string>
     <string name="tag_community">社区</string>
-    
+    <string name="to_add">去添加</string>
+    <string name="category_book_count">%1$d本</string>
+    <string name="category_book_msg">%1$d人在追 |&#160; %2$s%%读者留存</string>
+    <string name="book_detail_community">%1$s的社区</string>
+    <string name="book_detail_post_count">共有%1$d个帖子</string>
+    <string name="book_detail_user_lv">&#160;lv.%1$d</string>
+    <string name="book_detail_recommend_book_list_book_count">共%1$d本书 |&#160;</string>
+    <string name="book_detail_recommend_book_list_collector_count">%1$d人收藏</string>
+    <string name="book_detail_author">%1$s</string>
+    <string name="book_detail_category"> &#160;|&#160;%1$s |&#160;</string>
+    <string name="book_detail_retention_ratio">%1$s%%</string>
+    <string name="add_tag">Add Tag</string>
+    <string name="book_detail_has_joined_the_book_shelf">《%1$s》成功加入书架</string>
+    <string name="book_detail_has_remove_the_book_shelf">已移除《%1$s》</string>
+    <string name="remove_selected_book">移除所选书籍</string>
+    <string name="delete_local_cache">同时删除本地缓存</string>
+    <string name="confirm">确定</string>
+    <string name="cancel">取消</string>
+    <string name="cancle_top">取消置顶</string>
+    <string name="book_read_alreday_download">已缓存过:%1$s(%2$d/%3$d)...</string>
+    <string name="book_read_download_progress">正在缓存:%1$s(%2$d/%3$d)...</string>
+
+    <string name="book_read_add_book">添书</string>
+    <string name="book_read_would_you_like_to_add_this_to_the_book_shelf">是否将本书加入书架？</string>
+    <string name="book_read_join_the_book_shelf">加入书架</string>
+    <string name="book_read_not">不了</string>
+
+    <string name="book_read_mode_day_manual_setting">日间</string>
+    <string name="book_read_mode_night_manual_setting">夜间</string>
+
+    <string name="comment_floor">%1$d楼&#160;</string>
+    <string name="comment_like_count">❤%1$d次同感</string>
+    <string name="comment_best_comment">仰望神评论</string>
+    <string name="comment_comment_count">共%1$d条评论</string>
+    <string name="comment_reply_floor">(%1$d楼)</string>
+    <string name="comment_reply_nickname">回复 %1$s</string>
+
+    <string name="book_detail_is_joined_the_book_shelf">是否将《%1$s》加入书架</string>
+
 </resources>

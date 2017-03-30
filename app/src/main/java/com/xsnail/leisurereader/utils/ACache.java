@@ -8,6 +8,7 @@ import android.graphics.PixelFormat;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 
+
 import com.xsnail.leisurereader.data.config.AppConfig;
 
 import org.json.JSONArray;

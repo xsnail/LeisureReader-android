@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.xsnail.leisurereader.data.config.AppConfig;
 
+
 /**
  * Created by xsnail on 2017/2/14.
  */

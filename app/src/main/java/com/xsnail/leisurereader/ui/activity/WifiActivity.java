@@ -15,7 +15,7 @@ import butterknife.BindView;
 
 
 /**
- * Created by Administrator on 2017/2/14.
+ * Created by xsnail on 2017/2/14.
  */
 
 public class WifiActivity extends BaseActivity<WifiPresenterImpl> implements WifiContract.WifiView {
@@ -44,27 +44,21 @@ public class WifiActivity extends BaseActivity<WifiPresenterImpl> implements Wif
 
 
     @Override
-    protected void setViewToPresenter() {
-        if (presenter != null) {
-            presenter.viewToPresenter(this);
-        }
-    }
-
-    @Override
-    protected void initDatas() {
+    public void initDatas() {
         presenter.startServer(WEB_CONFIG_PORT,WEB_CONFIG_MAX_PARALLELS);
         presenter.getWifiInfo();
     }
 
     @Override
-    protected void initView() {
+    public void initView() {
 
     }
 
     @Override
-    protected int getLayoutId() {
+    public int getLayoutId() {
         return R.layout.activity_wifi;
     }
+
 
     @Override
     protected void onDestroy() {
@@ -73,8 +67,23 @@ public class WifiActivity extends BaseActivity<WifiPresenterImpl> implements Wif
     }
 
     @Override
+    public void initToolBar() {
+
+    }
+
+    @Override
     public void showWifiInfo(String wifiName, String wifiIp) {
         mTvWifiName.setText(wifiName);
         mTvWifiIp.setText("http://"+wifiIp+":"+WEB_CONFIG_PORT);
+    }
+
+    @Override
+    public void showError() {
+
+    }
+
+    @Override
+    public void complete() {
+
     }
 }

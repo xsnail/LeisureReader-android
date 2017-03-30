@@ -1,11 +1,18 @@
 package com.xsnail.leisurereader.base;
 
 import android.app.Activity;
+import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.view.WindowManager;
 
 import com.xsnail.leisurereader.App;
+import com.xsnail.leisurereader.R;
 import com.xsnail.leisurereader.di.components.AppComponent;
+import com.xsnail.leisurereader.view.CustomDialog;
 
 import javax.inject.Inject;
 
@@ -19,7 +26,11 @@ import butterknife.Unbinder;
 public abstract class BaseActivity<T extends BaseContract.BasePresenter> extends AppCompatActivity {
 
     private Unbinder unbinder;
-
+    public Toolbar mCommonToolbar;
+    protected Context mContext;
+    private CustomDialog dialog;
+    protected View statusBarView = null;
+    protected int statusBarColor = 0;
     @Inject
     protected T presenter;
 
@@ -27,12 +38,19 @@ public abstract class BaseActivity<T extends BaseContract.BasePresenter> extends
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
+        mContext = this;
         unbinder = ButterKnife.bind(this);
 
         setupComponent(App.getInstance().getAppComponent());
+        mCommonToolbar = ButterKnife.findById(this, R.id.common_toolbar);
+        if (mCommonToolbar != null) {
+            initToolBar();
+            setSupportActionBar(mCommonToolbar);
+        }
+
         setViewToPresenter();
-        initView();
         initDatas();
+        initView();
     }
 
     protected abstract void setupComponent(AppComponent appComponent);
@@ -40,14 +58,94 @@ public abstract class BaseActivity<T extends BaseContract.BasePresenter> extends
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        detachView();
         unbinder.unbind();
     }
 
-    protected abstract void setViewToPresenter();
+    public abstract void initToolBar();
 
-    protected abstract void initDatas();
+    public void setViewToPresenter(){
+        if(presenter != null){
+            presenter.viewToPresenter(this);
+        }
+    }
 
-    protected abstract void initView();
+    public abstract void initDatas();
 
-    protected abstract int getLayoutId();
+    public abstract void initView();
+
+    public abstract int getLayoutId();
+
+    public void detachView(){
+        if(presenter != null){
+            presenter.detachView();
+        }
+    }
+
+    // dialog
+    public CustomDialog getDialog() {
+        if (dialog == null) {
+            dialog = CustomDialog.instance(this);
+            dialog.setCancelable(true);
+        }
+        return dialog;
+    }
+
+    public void hideDialog() {
+        if (dialog != null)
+            dialog.hide();
+    }
+
+    public void showDialog() {
+        getDialog().show();
+    }
+
+    public void dismissDialog() {
+        if (dialog != null) {
+            dialog.dismiss();
+            dialog = null;
+        }
+    }
+
+    protected void gone(final View... views) {
+        if (views != null && views.length > 0) {
+            for (View view : views) {
+                if (view != null) {
+                    view.setVisibility(View.GONE);
+                }
+            }
+        }
+    }
+
+    protected void visible(final View... views) {
+        if (views != null && views.length > 0) {
+            for (View view : views) {
+                if (view != null) {
+                    view.setVisibility(View.VISIBLE);
+                }
+            }
+        }
+    }
+
+    protected boolean isVisible(View view) {
+        return view.getVisibility() == View.VISIBLE;
+    }
+
+    protected void hideStatusBar() {
+        WindowManager.LayoutParams attrs = getWindow().getAttributes();
+        attrs.flags |= WindowManager.LayoutParams.FLAG_FULLSCREEN;
+        getWindow().setAttributes(attrs);
+        if(statusBarView != null){
+            statusBarView.setBackgroundColor(Color.TRANSPARENT);
+        }
+    }
+
+    protected void showStatusBar() {
+        WindowManager.LayoutParams attrs = getWindow().getAttributes();
+        attrs.flags &= ~WindowManager.LayoutParams.FLAG_FULLSCREEN;
+        getWindow().setAttributes(attrs);
+        if(statusBarView != null){
+            statusBarView.setBackgroundColor(statusBarColor);
+        }
+    }
 }

@@ -1,6 +1,8 @@
 package com.xsnail.leisurereader.utils;
 
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 
@@ -23,5 +25,16 @@ public class NetUtils {
         if(ipAddress==0)return null;
         return ((ipAddress & 0xff)+"."+(ipAddress>>8 & 0xff)+"."
                 +(ipAddress>>16 & 0xff)+"."+(ipAddress>>24 & 0xff));
+    }
+
+    public static boolean isAvailable(Context context) {
+        NetworkInfo info = getActiveNetworkInfo(context);
+        return info != null && info.isAvailable();
+    }
+
+    private static NetworkInfo getActiveNetworkInfo(Context context) {
+        ConnectivityManager cm = (ConnectivityManager) context
+                .getSystemService(Context.CONNECTIVITY_SERVICE);
+        return cm.getActiveNetworkInfo();
     }
 }
