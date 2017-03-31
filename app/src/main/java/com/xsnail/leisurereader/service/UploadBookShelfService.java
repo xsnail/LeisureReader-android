@@ -67,7 +67,7 @@ public class UploadBookShelfService extends Service {
 
 
         Timer timer = new Timer();
-        timer.schedule(timerTask, 0, 10000);
+        timer.schedule(timerTask, 0, 60 * 1000);
 
     }
 

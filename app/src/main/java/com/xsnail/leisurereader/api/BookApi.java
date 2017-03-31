@@ -108,9 +108,12 @@ public class BookApi {
         return service.getBookDisscussionComments(disscussionId, start, limit);
     }
 
-    //登陆
-    public Observable<LoginResult> login(String username, String password){
-        return service.login(username,password);
+
+    public Observable<DiscussionList> getBookDetailDisscussionList(String book, String sort, String type, String start, String limit) {
+        return service.getBookDetailDisscussionList(book, sort, type, start, limit);
     }
 
+    public Observable<HotReview> getBookDetailReviewList(String book, String sort, String start, String limit) {
+        return service.getBookDetailReviewList(book, sort, start, limit);
+    }
 }

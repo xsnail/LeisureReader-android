@@ -261,7 +261,7 @@ public class BookShelfFragment extends BaseRVFragment<BookShelfPresenterImpl,Rec
 
     @Override
     public void showError() {
-
+        mRecyclerView.setRefreshing(false);
     }
 
     @Override

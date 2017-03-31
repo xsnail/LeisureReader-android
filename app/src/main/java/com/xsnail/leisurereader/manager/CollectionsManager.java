@@ -107,7 +107,7 @@ public class CollectionsManager {
                 break;
             }
         }
-//        EventManager.refreshCollectionList();
+        EventManager.refreshBookShelf();
     }
 
     /**
@@ -192,7 +192,7 @@ public class CollectionsManager {
         }
         list.add(bean);
         putCollectionList(list);
-//        EventManager.refreshCollectionList();
+        EventManager.refreshBookShelf();
         return true;
     }
 

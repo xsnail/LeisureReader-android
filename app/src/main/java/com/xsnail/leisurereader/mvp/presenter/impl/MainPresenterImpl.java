@@ -74,32 +74,35 @@ public class MainPresenterImpl extends RxPresenterImpl<MainContract.MainView> im
                     public void onNext(BookShelfResult data) {
                         if (data != null && mView != null && data.ok == true) {
                             LogUtils.d(data.toString());
-                            for(String bookId : data.data.bookIdList) {
-                                Observable<BookDetail> observable1 = bookApi.getBookDetail(bookId);
-                                observable1.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
-                                        .subscribe(new Observer<BookDetail>() {
-                                            @Override
-                                            public void onCompleted() {
-                                                EventManager.refreshBookShelf();
-                                            }
+                            if(data.data.bookIdList != null && data.data.bookIdList.size() > 0) {
+                                List<Recommend.RecommendBooks> recommendBookses = CollectionsManager.getInstance().getCollectionList();
+                                CollectionsManager.getInstance().removeSome(recommendBookses,true);
+                                for (String bookId : data.data.bookIdList) {
+                                    Observable<BookDetail> observable1 = bookApi.getBookDetail(bookId);
+                                    observable1.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                                            .subscribe(new Observer<BookDetail>() {
+                                                @Override
+                                                public void onCompleted() {
 
-                                            @Override
-                                            public void onError(Throwable e) {
+                                                }
 
-                                            }
+                                                @Override
+                                                public void onError(Throwable e) {
 
-                                            @Override
-                                            public void onNext(BookDetail bookDetail) {
-                                                Recommend.RecommendBooks recommendBooks = new Recommend.RecommendBooks();
-                                                recommendBooks = new Recommend.RecommendBooks();
-                                                recommendBooks.title = bookDetail.title;
-                                                recommendBooks._id = bookDetail._id;
-                                                recommendBooks.cover = bookDetail.cover;
-                                                recommendBooks.lastChapter = bookDetail.lastChapter;
-                                                recommendBooks.updated = bookDetail.updated;
-                                                CollectionsManager.getInstance().add(recommendBooks);
-                                            }
-                                        });
+                                                }
+
+                                                @Override
+                                                public void onNext(BookDetail bookDetail) {
+                                                    Recommend.RecommendBooks recommendBooks = new Recommend.RecommendBooks();
+                                                    recommendBooks.title = bookDetail.title;
+                                                    recommendBooks._id = bookDetail._id;
+                                                    recommendBooks.cover = bookDetail.cover;
+                                                    recommendBooks.lastChapter = bookDetail.lastChapter;
+                                                    recommendBooks.updated = bookDetail.updated;
+                                                    CollectionsManager.getInstance().add(recommendBooks);
+                                                }
+                                            });
+                                }
                             }
 
 //                            mView.showSysncSucceed();

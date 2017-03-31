@@ -447,7 +447,7 @@ public class BookReadActivity extends BaseActivity<BookReadPresenterImpl> implem
     @OnClick(R.id.tvBookReadCommunity)
     public void onClickCommunity() {
         gone(rlReadAaSet, rlReadMark);
-//        BookDetailActivity.startActivity(this, bookId);
+        BookCommunityActivity.startActivity(this, bookId, mTvBookReadTocTitle.getText().toString(), 0);
     }
 
     @OnClick(R.id.tvBookReadIntroduce)

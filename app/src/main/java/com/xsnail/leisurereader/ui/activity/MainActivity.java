@@ -299,6 +299,9 @@ public class MainActivity extends BaseActivity<MainPresenterImpl> implements Nav
                 loginout();
                 break;
             case R.id.about_me:
+                Uri uri=Uri.parse("https://github.com/xsnail");
+                Intent uriIntent=new Intent(Intent.ACTION_VIEW,uri);
+                mContext.startActivity(uriIntent);
                 break;
             default:
                 break;

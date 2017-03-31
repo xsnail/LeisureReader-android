@@ -195,15 +195,4 @@
             </RelativeLayout>
         </RelativeLayout>
     </com.xsnail.leisurereader.view.ReboundScrollView>
-
-    <TextView
-        android:id="@+id/tvBottom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:text="© 2016 JustWayward All Rights Reserved"
-        android:textColor="@color/common_h3"
-        android:textSize="12dp" />
 </RelativeLayout>

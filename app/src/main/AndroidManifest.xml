@@ -25,8 +25,8 @@
         <activity android:name=".ui.activity.ScanLocalBookActivity"/>
         <activity android:name=".ui.activity.LoginActivity"/>
         <activity android:name=".ui.activity.RegisterActivity"/>
+        <activity android:name=".ui.activity.BookCommunityActivity"/>
         <service android:name=".service.UploadBookShelfService"/>
-
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />

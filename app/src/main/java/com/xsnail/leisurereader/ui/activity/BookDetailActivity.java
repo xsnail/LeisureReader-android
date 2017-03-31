@@ -234,7 +234,6 @@ public class BookDetailActivity extends BaseActivity<BookDetailPresenterImpl> im
             mBtnJoinCollection.postInvalidate();
             isJoinedCollections = true;
         }
-        EventManager.refreshBookShelf();
     }
 
     /**
@@ -307,5 +306,10 @@ public class BookDetailActivity extends BaseActivity<BookDetailPresenterImpl> im
                     R.string.book_detail_has_remove_the_book_shelf), recommendBooks.title));
             initCollection(true);
         }
+    }
+
+    @OnClick(R.id.btnRead)
+    public void read(){
+        BookReadActivity.startActivity(mContext,recommendBooks);
     }
 }
