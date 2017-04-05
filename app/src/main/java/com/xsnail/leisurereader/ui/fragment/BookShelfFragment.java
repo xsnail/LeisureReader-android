@@ -141,16 +141,16 @@ public class BookShelfFragment extends BaseRVFragment<BookShelfPresenterImpl,Rec
                             //置顶、取消置顶
                             CollectionsManager.getInstance().top(mAdapter.getItem(position)._id, !isTop);
                             break;
+//                        case 1:
+//                            //缓存全本
+//                            if (mAdapter.getItem(position).isFromSD) {
+//                                mRecyclerView.showTipViewAndDelayClose("本地文件不支持该选项哦");
+//                            } else {
+//                                showDialog();
+//                                mPresenter.getTocList(mAdapter.getItem(position)._id);
+//                            }
+//                            break;
                         case 1:
-                            //缓存全本
-                            if (mAdapter.getItem(position).isFromSD) {
-                                mRecyclerView.showTipViewAndDelayClose("本地文件不支持该选项哦");
-                            } else {
-                                showDialog();
-                                mPresenter.getTocList(mAdapter.getItem(position)._id);
-                            }
-                            break;
-                        case 2:
                             //删除
                             List<Recommend.RecommendBooks> removeList = new ArrayList<>();
                             removeList.add(mAdapter.getItem(position));
@@ -231,11 +231,14 @@ public class BookShelfFragment extends BaseRVFragment<BookShelfPresenterImpl,Rec
     public void onRefresh() {
         super.onRefresh();
         mPresenter.syncBookShelf();
-//        List<Recommend.RecommendBooks> data = CollectionsManager.getInstance().getCollectionListBySort();
-//        mAdapter.clear();
-//        mAdapter.addAll(data);
-//        mAdapter.notifyDataSetChanged();
-//        mRecyclerView.setRefreshing(false);
+    }
+
+    public void refreshCollectionList(){
+        List<Recommend.RecommendBooks> data = CollectionsManager.getInstance().getCollectionListBySort();
+        mAdapter.clear();
+        mAdapter.addAll(data);
+        mAdapter.notifyDataSetChanged();
+        mRecyclerView.setRefreshing(false);
     }
 
     //TODO

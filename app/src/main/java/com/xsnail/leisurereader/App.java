@@ -9,6 +9,7 @@ import com.xsnail.leisurereader.di.components.AppComponent;
 import com.xsnail.leisurereader.di.components.DaggerAppComponent;
 import com.xsnail.leisurereader.di.modules.AppModule;
 import com.xsnail.leisurereader.di.modules.BookApiModule;
+import com.xsnail.leisurereader.service.DownloadBookService;
 import com.xsnail.leisurereader.service.UploadBookShelfService;
 import com.xsnail.leisurereader.utils.SharedPreferencesUtil;
 
@@ -29,8 +30,9 @@ public class App extends Application {
         initialize();
         initPrefs();
 
-        startService(new Intent(this, UploadBookShelfService.class));
     }
+
+
 
     public static App getInstance(){
         return sInstance;

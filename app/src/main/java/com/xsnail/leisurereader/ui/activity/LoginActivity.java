@@ -20,6 +20,7 @@ import com.xsnail.leisurereader.di.components.DaggerMainComponent;
 import com.xsnail.leisurereader.manager.EventManager;
 import com.xsnail.leisurereader.mvp.contract.LoginContract;
 import com.xsnail.leisurereader.mvp.presenter.impl.LoginPresenterImpl;
+import com.xsnail.leisurereader.utils.CommonUtils;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -67,7 +68,8 @@ public class LoginActivity extends BaseActivity<LoginPresenterImpl> implements L
             @Override
             public void onClick(View v) {
                if(validate()) {
-                   presenter.login(_usernameText.getText().toString(), _passwordText.getText().toString());
+                   showDialog();
+                   presenter.login(_usernameText.getText().toString(), CommonUtils.getMd5(_passwordText.getText().toString()));
                }
             }
         });
@@ -134,6 +136,7 @@ public class LoginActivity extends BaseActivity<LoginPresenterImpl> implements L
 
     @Override
     public void loginSucceed() {
+        dismissDialog();
         _loginButton.setEnabled(true);
         EventManager.refreshUser();
         finish();
@@ -141,6 +144,7 @@ public class LoginActivity extends BaseActivity<LoginPresenterImpl> implements L
 
     @Override
     public void loginFailed(String error) {
+        dismissDialog();
         Toast.makeText(getBaseContext(), error, Toast.LENGTH_SHORT).show();
         _loginButton.setEnabled(true);
     }

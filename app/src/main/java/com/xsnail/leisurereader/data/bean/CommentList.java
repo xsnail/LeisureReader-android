@@ -3,10 +3,6 @@ package com.xsnail.leisurereader.data.bean;
 
 import java.util.List;
 
-/**
- * Created by lfh on 2016/9/1.
- * 评论列表
- */
 public class CommentList extends Base {
 
 

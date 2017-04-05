@@ -20,6 +20,7 @@ import com.xsnail.leisurereader.mvp.contract.LoginContract;
 import com.xsnail.leisurereader.mvp.contract.RegisterContract;
 import com.xsnail.leisurereader.mvp.presenter.impl.LoginPresenterImpl;
 import com.xsnail.leisurereader.mvp.presenter.impl.RegisterPresenterImpl;
+import com.xsnail.leisurereader.utils.CommonUtils;
 import com.xsnail.leisurereader.utils.ToastUtils;
 
 import butterknife.BindView;
@@ -64,7 +65,8 @@ public class RegisterActivity extends BaseActivity<RegisterPresenterImpl> implem
             @Override
             public void onClick(View v) {
                 if(validate()){
-                    presenter.register(_nameText.getText().toString(),_pswText.getText().toString());
+                    showDialog();
+                    presenter.register(_nameText.getText().toString(), CommonUtils.getMd5(_pswText.getText().toString()));
                 }
             }
         });
@@ -119,18 +121,19 @@ public class RegisterActivity extends BaseActivity<RegisterPresenterImpl> implem
 
     @Override
     public void complete() {
-
     }
 
 
     @Override
     public void registerSucceed() {
+        dismissDialog();
         ToastUtils.showToast("注册成功");
         finish();
     }
 
     @Override
     public void registerFail(String error) {
+        dismissDialog();
         ToastUtils.showToast(error);
     }
 }

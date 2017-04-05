@@ -46,7 +46,7 @@
         android:id="@+id/tvRetry"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/mTvWifiIp"
+        android:layout_below="@+id/tv_wifi_ip"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:background="@drawable/bg_wifi_name_shape"

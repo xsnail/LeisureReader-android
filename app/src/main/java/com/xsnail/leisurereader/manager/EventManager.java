@@ -2,6 +2,7 @@ package com.xsnail.leisurereader.manager;
 
 
 import com.xsnail.leisurereader.data.support.RefreshBookShelfEvent;
+import com.xsnail.leisurereader.data.support.RefreshCollectionListEvent;
 import com.xsnail.leisurereader.data.support.RefreshUserEvent;
 
 import org.greenrobot.eventbus.EventBus;
@@ -14,6 +15,10 @@ public class EventManager {
 
     public static void refreshUser() {
         EventBus.getDefault().post(new RefreshUserEvent());
+    }
+
+    public static void refreshCollectionList(){
+        EventBus.getDefault().post(new RefreshCollectionListEvent());
     }
 
 

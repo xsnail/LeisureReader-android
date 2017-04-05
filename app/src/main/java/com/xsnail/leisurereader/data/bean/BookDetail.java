@@ -3,10 +3,6 @@ package com.xsnail.leisurereader.data.bean;
 import java.io.Serializable;
 import java.util.List;
 
-/**
- * @author yuyh.
- * @date 2016/8/4.
- */
 public class BookDetail implements Serializable {
 
 

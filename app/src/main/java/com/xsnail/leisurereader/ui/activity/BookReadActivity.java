@@ -37,15 +37,20 @@ import com.xsnail.leisurereader.data.config.Constant;
 import com.xsnail.leisurereader.data.support.BookMark;
 import com.xsnail.leisurereader.data.bean.BookMixAToc;
 import com.xsnail.leisurereader.data.bean.Recommend;
+import com.xsnail.leisurereader.data.support.DownloadMessage;
+import com.xsnail.leisurereader.data.support.DownloadProgress;
+import com.xsnail.leisurereader.data.support.DownloadQueue;
 import com.xsnail.leisurereader.data.support.ReadTheme;
 import com.xsnail.leisurereader.di.components.AppComponent;
 import com.xsnail.leisurereader.di.components.DaggerBookShelfComponent;
 import com.xsnail.leisurereader.manager.CacheManager;
 import com.xsnail.leisurereader.manager.CollectionsManager;
+import com.xsnail.leisurereader.manager.EventManager;
 import com.xsnail.leisurereader.manager.SettingManager;
 import com.xsnail.leisurereader.manager.ThemeManager;
 import com.xsnail.leisurereader.mvp.contract.BookReadContract;
 import com.xsnail.leisurereader.mvp.presenter.impl.BookReadPresenterImpl;
+import com.xsnail.leisurereader.service.DownloadBookService;
 import com.xsnail.leisurereader.ui.adapter.BookMarkAdapter;
 import com.xsnail.leisurereader.ui.adapter.ReadThemeAdapter;
 import com.xsnail.leisurereader.ui.adapter.TocListAdapter;
@@ -60,15 +65,22 @@ import com.xsnail.leisurereader.view.readview.OnReadStateChangeListener;
 import com.xsnail.leisurereader.view.readview.OverlappedWidget;
 import com.xsnail.leisurereader.view.readview.PageWidget;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import rx.Observable;
+import rx.functions.Action1;
 
 public class BookReadActivity extends BaseActivity<BookReadPresenterImpl> implements BookReadContract.BookReadView {
 
@@ -224,14 +236,16 @@ public class BookReadActivity extends BaseActivity<BookReadPresenterImpl> implem
         intentFilter.addAction(Intent.ACTION_TIME_TICK);
 
         CollectionsManager.getInstance().setRecentReadingTime(bookId);
-//        Observable.timer(1000, TimeUnit.MILLISECONDS)
-//                .subscribe(new Action1<Long>() {
-//                    @Override
-//                    public void call(Long aLong) {
-//                        //延迟1秒刷新书架
-//                        EventManager.refreshCollectionList();
-//                    }
-//                });
+        Observable.timer(1000, TimeUnit.MILLISECONDS)
+                .subscribe(new Action1<Long>() {
+                    @Override
+                    public void call(Long aLong) {
+                        //延迟1秒刷新书架
+                        EventManager.refreshCollectionList();
+                    }
+                });
+
+        EventBus.getDefault().register(this);
     }
 
 
@@ -456,12 +470,6 @@ public class BookReadActivity extends BaseActivity<BookReadPresenterImpl> implem
         BookDetailActivity.startActivity(mContext, bookId);
     }
 
-//    @OnClick(R.id.tvBookReadSource)
-//    public void onClickSource() {
-////        BookSourceActivity.start(this, bookId, 1);
-//    }
-
-    /***************Bottom Bar*****************/
 
     @OnClick(R.id.tvBookReadMode)
     public void onClickChangeMode() { // 日/夜间模式切换
@@ -511,28 +519,28 @@ public class BookReadActivity extends BaseActivity<BookReadPresenterImpl> implem
 
     @OnClick(R.id.tvBookReadDownload)
     public void downloadBook() {
-//        gone(rlReadAaSet);
-//        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//        builder.setTitle("缓存多少章？")
-//                .setItems(new String[]{"后面五十章", "后面全部", "全部"}, new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        switch (which) {
-//                            case 0:
-//                                DownloadBookService.post(new DownloadQueue(bookId, mChapterList, currentChapter + 1, currentChapter + 50));
-//                                break;
-//                            case 1:
-//                                DownloadBookService.post(new DownloadQueue(bookId, mChapterList, currentChapter + 1, mChapterList.size()));
-//                                break;
-//                            case 2:
-//                                DownloadBookService.post(new DownloadQueue(bookId, mChapterList, 1, mChapterList.size()));
-//                                break;
-//                            default:
-//                                break;
-//                        }
-//                    }
-//                });
-//        builder.show();
+        gone(rlReadAaSet);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("缓存多少章？")
+                .setItems(new String[]{"后面五十章", "后面全部", "全部"}, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which) {
+                            case 0:
+                                DownloadBookService.post(new DownloadQueue(bookId, mChapterList, currentChapter + 1, currentChapter + 50));
+                                break;
+                            case 1:
+                                DownloadBookService.post(new DownloadQueue(bookId, mChapterList, currentChapter + 1, mChapterList.size()));
+                                break;
+                            case 2:
+                                DownloadBookService.post(new DownloadQueue(bookId, mChapterList, 1, mChapterList.size()));
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                });
+        builder.show();
     }
 
     @OnClick(R.id.tvBookMark)
@@ -564,7 +572,6 @@ public class BookReadActivity extends BaseActivity<BookReadPresenterImpl> implem
         }
     }
 
-    /***************Setting Menu*****************/
 
     @OnClick(R.id.ivBrightnessMinus)
     public void brightnessMinus() {
@@ -650,38 +657,37 @@ public class BookReadActivity extends BaseActivity<BookReadPresenterImpl> implem
         }
     }
 
-    /***************Event*****************/
 
-//    @Subscribe(threadMode = ThreadMode.MAIN)
-//    public void showDownProgress(DownloadProgress progress) {
-//        if (bookId.equals(progress.bookId)) {
-//            if (isVisible(mLlBookReadBottom)) { // 如果工具栏显示，则进度条也显示
-//                visible(mTvDownloadProgress);
-//                // 如果之前缓存过，就给提示
-//                mTvDownloadProgress.setText(progress.message);
-//            } else {
-//                gone(mTvDownloadProgress);
-//            }
-//        }
-//    }
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void showDownProgress(DownloadProgress progress) {
+        if (bookId.equals(progress.bookId)) {
+            if (isVisible(mLlBookReadBottom)) { // 如果工具栏显示，则进度条也显示
+                visible(mTvDownloadProgress);
+                // 如果之前缓存过，就给提示
+                mTvDownloadProgress.setText(progress.message);
+            } else {
+                gone(mTvDownloadProgress);
+            }
+        }
+    }
 
-//    @Subscribe(threadMode = ThreadMode.MAIN)
-//    public void downloadMessage(final DownloadMessage msg) {
-//        if (isVisible(mLlBookReadBottom)) { // 如果工具栏显示，则进度条也显示
-//            if (bookId.equals(msg.bookId)) {
-//                visible(mTvDownloadProgress);
-//                mTvDownloadProgress.setText(msg.message);
-//                if (msg.isComplete) {
-//                    mTvDownloadProgress.postDelayed(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            gone(mTvDownloadProgress);
-//                        }
-//                    }, 2500);
-//                }
-//            }
-//        }
-//    }
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void downloadMessage(final DownloadMessage msg) {
+        if (isVisible(mLlBookReadBottom)) { // 如果工具栏显示，则进度条也显示
+            if (bookId.equals(msg.bookId)) {
+                visible(mTvDownloadProgress);
+                mTvDownloadProgress.setText(msg.message);
+                if (msg.isComplete) {
+                    mTvDownloadProgress.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            gone(mTvDownloadProgress);
+                        }
+                    }, 2500);
+                }
+            }
+        }
+    }
 
     /**
      * 显示加入书架对话框
@@ -793,10 +799,7 @@ public class BookReadActivity extends BaseActivity<BookReadPresenterImpl> implem
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
-//        EventManager.refreshCollectionIcon();
-//        EventManager.refreshCollectionList();
-//        EventBus.getDefault().unregister(this);
+        EventBus.getDefault().unregister(this);
 
         try {
             unregisterReceiver(receiver);

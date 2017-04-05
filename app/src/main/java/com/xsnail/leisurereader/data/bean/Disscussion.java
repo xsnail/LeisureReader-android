@@ -3,10 +3,7 @@ package com.xsnail.leisurereader.data.bean;
 
 import java.util.List;
 
-/**
- * Created by lfh on 2016/9/1.
- * 综合讨论 详情
- */
+
 public class Disscussion extends Base {
 
 

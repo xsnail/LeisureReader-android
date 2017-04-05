@@ -24,6 +24,7 @@ import com.xsnail.leisurereader.R;
 import com.xsnail.leisurereader.base.BaseActivity;
 import com.xsnail.leisurereader.data.bean.SearchDetail;
 import com.xsnail.leisurereader.data.support.RefreshBookShelfEvent;
+import com.xsnail.leisurereader.data.support.RefreshCollectionListEvent;
 import com.xsnail.leisurereader.data.support.RefreshUserEvent;
 import com.xsnail.leisurereader.di.components.AppComponent;
 import com.xsnail.leisurereader.di.components.DaggerBookCityComponent;
@@ -31,6 +32,8 @@ import com.xsnail.leisurereader.di.components.DaggerMainComponent;
 import com.xsnail.leisurereader.manager.EventManager;
 import com.xsnail.leisurereader.mvp.contract.MainContract;
 import com.xsnail.leisurereader.mvp.presenter.impl.MainPresenterImpl;
+import com.xsnail.leisurereader.service.DownloadBookService;
+import com.xsnail.leisurereader.service.UploadBookShelfService;
 import com.xsnail.leisurereader.ui.fragment.BookCityFragment;
 import com.xsnail.leisurereader.ui.fragment.BookShelfFragment;
 import com.xsnail.leisurereader.ui.fragment.CommunityFragment;
@@ -90,6 +93,8 @@ public class MainActivity extends BaseActivity<MainPresenterImpl> implements Nav
     @Override
     public void initDatas() {
         EventBus.getDefault().register(mContext);
+        startService(new Intent(this, UploadBookShelfService.class));
+        startService(new Intent(this, DownloadBookService.class));
     }
 
     @Override
@@ -376,9 +381,18 @@ public class MainActivity extends BaseActivity<MainPresenterImpl> implements Nav
         }
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void RefreshCollectionList(RefreshCollectionListEvent event){
+        if(bookShelfFragment != null){
+            bookShelfFragment.refreshCollectionList();
+        }
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(mContext);
+        stopService(new Intent(this, UploadBookShelfService.class));
+        stopService(new Intent(this, DownloadBookService.class));
     }
 }

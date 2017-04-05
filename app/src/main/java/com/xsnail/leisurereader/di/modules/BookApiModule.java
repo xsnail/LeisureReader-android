@@ -3,7 +3,6 @@ package com.xsnail.leisurereader.di.modules;
 
 import com.xsnail.leisurereader.api.ApiConfig;
 import com.xsnail.leisurereader.api.BookApi;
-import com.xsnail.leisurereader.api.MyApi;
 import com.xsnail.leisurereader.api.interceptor.HeaderInterceptor;
 
 import java.util.concurrent.TimeUnit;
@@ -37,11 +36,4 @@ public class BookApiModule {
     protected BookApi provideBookService(OkHttpClient client){
         return BookApi.getInstance(client);
     }
-
-    @Provides
-    protected MyApi provideMyService(OkHttpClient client){
-        return MyApi.getInstance(client);
-    }
-
-
 }

@@ -15,10 +15,6 @@ import com.yuyh.easyadapter.abslistview.EasyLVHolder;
 import java.util.List;
 
 
-/**
- * @author yuyh.
- * @date 2016/11/18.
- */
 public class BookMarkAdapter extends EasyLVAdapter<BookMark> {
 
     public BookMarkAdapter(Context context, List<BookMark> list) {

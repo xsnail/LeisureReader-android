@@ -1,19 +1,15 @@
 package com.xsnail.leisurereader.mvp.presenter.impl;
 
 import com.xsnail.leisurereader.api.BookApi;
-import com.xsnail.leisurereader.api.MyApi;
 import com.xsnail.leisurereader.base.RxPresenterImpl;
 import com.xsnail.leisurereader.data.bean.AutoComplete;
 import com.xsnail.leisurereader.data.bean.BookDetail;
 import com.xsnail.leisurereader.data.bean.BookShelfResult;
 import com.xsnail.leisurereader.data.bean.Recommend;
-import com.xsnail.leisurereader.data.bean.RegisterResult;
 import com.xsnail.leisurereader.data.bean.SearchDetail;
 import com.xsnail.leisurereader.manager.CollectionsManager;
-import com.xsnail.leisurereader.manager.EventManager;
 import com.xsnail.leisurereader.mvp.contract.MainContract;
 import com.xsnail.leisurereader.utils.LogUtils;
-import com.xsnail.leisurereader.utils.StringUtils;
 
 import java.util.List;
 
@@ -32,12 +28,10 @@ import rx.schedulers.Schedulers;
 public class MainPresenterImpl extends RxPresenterImpl<MainContract.MainView> implements MainContract.MainPresenter<MainContract.MainView> {
 
     private BookApi bookApi;
-    private MyApi myApi;
 
     @Inject
-    public MainPresenterImpl(BookApi bookApi,MyApi myApi) {
+    public MainPresenterImpl(BookApi bookApi) {
         this.bookApi = bookApi;
-        this.myApi = myApi;
     }
 
     @Override
@@ -67,7 +61,7 @@ public class MainPresenterImpl extends RxPresenterImpl<MainContract.MainView> im
 
     @Override
     public void syncBookShelf(String userName) {
-        Observable<BookShelfResult> observable = myApi.sync(userName);
+        Observable<BookShelfResult> observable = bookApi.sync(userName);
         observable.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<BookShelfResult>() {
                     @Override

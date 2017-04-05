@@ -19,10 +19,6 @@ import com.xsnail.leisurereader.view.recyclerview.adapter.BaseViewHolder;
 import com.xsnail.leisurereader.view.recyclerview.adapter.RecyclerArrayAdapter;
 
 
-/**
- * @author lfh.
- * @date 16/9/3.
- */
 public class BookDiscussionAdapter extends RecyclerArrayAdapter<DiscussionList.PostsBean> {
 
 

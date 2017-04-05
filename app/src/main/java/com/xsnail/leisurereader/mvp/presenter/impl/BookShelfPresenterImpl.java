@@ -43,54 +43,6 @@ public class BookShelfPresenterImpl extends RxPresenterImpl<BookShelfContract.Bo
         this.bookApi = bookApi;
     }
 
-    public void getUserBookShelf(LoginResult loginResult) {
-        Subscription rxSubscription = bookApi.getUserBookShelf(loginResult).subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<UserBookShelf>() {
-                    @Override
-                    public void onNext(UserBookShelf data) {
-                        if (data != null && mView != null) {
-                            mView.showUserBookShelf();
-                        }
-                    }
-
-                    @Override
-                    public void onCompleted() {
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Log.e(TAG, "onError: " + e);
-                    }
-                });
-        addSubscribe(rxSubscription);
-    }
-
-    public void getTocList(final String bookId) {
-        bookApi.getBookMixAToc(bookId, "chapters").subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<BookMixAToc>() {
-                    @Override
-                    public void onNext(BookMixAToc data) {
-                        ACache.get(mContext).put(bookId + "bookToc", data);
-                        List<BookMixAToc.mixToc.Chapters> list = data.mixToc.chapters;
-                        if (list != null && !list.isEmpty() && mView != null) {
-                            mView.showBookToc(bookId, list);
-                        }
-                    }
-
-                    @Override
-                    public void onCompleted() {
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        LogUtils.e("onError: " + e);
-                        mView.showError();
-                    }
-                });
-    }
-
     @Override
     public void syncBookShelf() {
         List<Recommend.RecommendBooks> list = CollectionsManager.getInstance().getCollectionList();

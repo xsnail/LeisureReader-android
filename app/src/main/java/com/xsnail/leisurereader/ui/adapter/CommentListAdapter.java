@@ -14,9 +14,6 @@ import com.xsnail.leisurereader.view.recyclerview.adapter.RecyclerArrayAdapter;
 
 /**
  * 帖子 评论、回复
- *
- * @author lfh.
- * @date 16/9/3.
  */
 public class CommentListAdapter extends RecyclerArrayAdapter<CommentList.CommentsBean> {
 

@@ -1,6 +1,5 @@
 package com.xsnail.leisurereader.base;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;

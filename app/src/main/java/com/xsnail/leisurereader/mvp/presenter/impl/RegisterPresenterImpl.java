@@ -1,13 +1,11 @@
 package com.xsnail.leisurereader.mvp.presenter.impl;
 
-import com.xsnail.leisurereader.api.MyApi;
+import com.xsnail.leisurereader.api.BookApi;
 import com.xsnail.leisurereader.base.RxPresenterImpl;
 import com.xsnail.leisurereader.data.bean.LoginResult;
 import com.xsnail.leisurereader.data.bean.RegisterResult;
 import com.xsnail.leisurereader.mvp.contract.RegisterContract;
 import com.xsnail.leisurereader.utils.LogUtils;
-import com.xsnail.leisurereader.utils.SharedPreferencesUtil;
-import com.xsnail.leisurereader.utils.StringUtils;
 
 import javax.inject.Inject;
 
@@ -21,11 +19,11 @@ import rx.schedulers.Schedulers;
  */
 
 public class RegisterPresenterImpl extends RxPresenterImpl<RegisterContract.RegisterView> implements RegisterContract.RegisterPresenter<RegisterContract.RegisterView> {
-    private MyApi myApi;
+    private BookApi bookApi;
 
     @Inject
-    public RegisterPresenterImpl(MyApi myApi) {
-        this.myApi = myApi;
+    public RegisterPresenterImpl(BookApi bookApi) {
+        this.bookApi = bookApi;
     }
 
     @Override
@@ -33,7 +31,10 @@ public class RegisterPresenterImpl extends RxPresenterImpl<RegisterContract.Regi
 //        String key = StringUtils.creatAcacheKey("user-register");
 //        Observable<LoginResult> fromNetWork = myApi.login(username,password)
 //                .compose(RxUtils.<LoginResult>rxCacheBeanHelper(key));
-        Observable<RegisterResult> observable = myApi.register(username, password);
+        LoginResult.User user = new LoginResult.User();
+        user.userName = username;
+        user.passWord = password;
+        Observable<RegisterResult> observable = bookApi.register(user);
         observable.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<RegisterResult>() {
                     @Override

@@ -22,10 +22,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author yuyh.
- * @date 16/4/9.
- */
+
 public class FileUtils {
 
     public static String getChapterPath(String bookId, int chapter) {

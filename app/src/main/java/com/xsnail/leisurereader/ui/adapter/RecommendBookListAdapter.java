@@ -16,10 +16,6 @@ import com.yuyh.easyadapter.recyclerview.EasyRVHolder;
 import java.util.List;
 
 
-/**
- * @author lfh.
- * @date 16/8/7.
- */
 public class RecommendBookListAdapter extends EasyRVAdapter<RecommendBookList.RecommendBook> {
 
     private OnRvItemClickListener itemClickListener;

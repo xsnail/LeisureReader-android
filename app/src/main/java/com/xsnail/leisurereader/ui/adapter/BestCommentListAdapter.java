@@ -14,10 +14,7 @@ import com.yuyh.easyadapter.recyclerview.EasyRVHolder;
 
 import java.util.List;
 
-/**
- * @author lfh.
- * @date 16/9/2.
- */
+
 public class BestCommentListAdapter extends EasyRVAdapter<CommentList.CommentsBean> {
 
     private OnRvItemClickListener listener;

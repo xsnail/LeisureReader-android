@@ -4,7 +4,6 @@ import android.content.Context;
 
 
 import com.xsnail.leisurereader.api.BookApi;
-import com.xsnail.leisurereader.api.MyApi;
 import com.xsnail.leisurereader.di.modules.AppModule;
 import com.xsnail.leisurereader.di.modules.BookApiModule;
 
@@ -19,7 +18,5 @@ public interface AppComponent {
     Context getContext();
 
     BookApi getBookApi();
-
-    MyApi getMyApi();
 
 }

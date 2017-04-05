@@ -4,6 +4,7 @@ package com.xsnail.leisurereader.api;
 import com.xsnail.leisurereader.data.bean.AutoComplete;
 import com.xsnail.leisurereader.data.bean.BookDetail;
 import com.xsnail.leisurereader.data.bean.BookMixAToc;
+import com.xsnail.leisurereader.data.bean.BookShelfResult;
 import com.xsnail.leisurereader.data.bean.BooksByCats;
 import com.xsnail.leisurereader.data.bean.CategoryList;
 import com.xsnail.leisurereader.data.bean.ChapterRead;
@@ -13,9 +14,10 @@ import com.xsnail.leisurereader.data.bean.Disscussion;
 import com.xsnail.leisurereader.data.bean.HotReview;
 import com.xsnail.leisurereader.data.bean.LoginResult;
 import com.xsnail.leisurereader.data.bean.RecommendBookList;
+import com.xsnail.leisurereader.data.bean.RegisterResult;
 import com.xsnail.leisurereader.data.bean.SearchDetail;
-import com.xsnail.leisurereader.data.bean.UserBookShelf;
 
+import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
@@ -29,7 +31,6 @@ import rx.Observable;
 public interface BookApiService {
     /**
      * 获取分类
-     *
      * @return
      */
     @GET("/cats/lv2/statistics")
@@ -37,11 +38,11 @@ public interface BookApiService {
 
     /**
      * 按分类获取书籍列表
-     *
      * @param gender male、female
      * @param type   hot(热门)、new(新书)、reputation(好评)、over(完结)
      * @param major  玄幻
      * @param minor  东方玄幻、异界大陆、异界争霸、远古神话
+     * @param start  1
      * @param limit  50
      * @return
      */
@@ -49,24 +50,33 @@ public interface BookApiService {
     Observable<BooksByCats> getBooksByCats(@Query("gender") String gender, @Query("type") String type, @Query("major") String major, @Query("minor") String minor, @Query("start") int start, @Query("limit") int limit);
 
 
+    /**
+     * 按书籍id获取书籍详情
+     * @param bookId
+     * @return
+     */
     @GET("/book/{bookId}")
     Observable<BookDetail> getBookDetail(@Path("bookId") String bookId);
 
     /**
-     * 热门评论
-     *
-     * @param book
+     * 根据书籍id获取热门评论
+     * @param book 51d11e782de6405c45000068
      * @return
      */
     @GET("/post/review/best-by-book")
     Observable<HotReview> getHotReview(@Query("book") String book);
 
+    /**
+     * 根据书籍id获取推荐书单
+     * @param bookId 51d11e782de6405c45000068
+     * @param limit
+     * @return
+     */
     @GET("/book-list/{bookId}/recommend")
     Observable<RecommendBookList> getRecommendBookList(@Path("bookId") String bookId, @Query("limit") String limit);
 
     /**
      * 关键字自动补全
-     *
      * @param query
      * @return
      */
@@ -74,20 +84,28 @@ public interface BookApiService {
     Observable<AutoComplete> autoComplete(@Query("query") String query);
 
     /**
-     * 书籍查询
-     *
+     * 根据关键字书籍查询
      * @param query
      * @return
      */
     @GET("/book/fuzzy-search")
     Observable<SearchDetail> searchBooks(@Query("query") String query);
 
-    @GET("/loginResult/book/shelf")
-    Observable<UserBookShelf> getUserBookShelf(LoginResult loginResult);
-
+    /**
+     * 根据书籍id获取章节内容
+     * @param bookId 51d11e782de6405c45000068
+     * @param view  chapters
+     * @return
+     */
     @GET("/mix-atoc/{bookId}")
     Observable<BookMixAToc> getBookMixAToc(@Path("bookId") String bookId, @Query("view") String view);
 
+
+    /**
+     * 根据章节url获取章节内容
+     * @param url
+     * @return
+     */
     @GET("http://chapter2.zhuishushenqi.com/chapter/{url}")
     Observable<ChapterRead> getChapterRead(@Path("url") String url);
 
@@ -172,4 +190,30 @@ public interface BookApiService {
      */
     @GET("/post/review/by-book")
     Observable<HotReview> getBookDetailReviewList(@Query("book") String book, @Query("sort") String sort, @Query("start") String start, @Query("limit") String limit);
+
+    /**
+     * 登陆
+     */
+    @POST("http://10.0.2.2:8080/user/login")
+    Observable<LoginResult> login(@Body LoginResult.User user);
+
+    /**
+     * 注册
+     */
+    @POST("http://10.0.2.2:8080/user/register")
+    Observable<RegisterResult> register(@Body LoginResult.User user);
+
+    /**
+     * 从服务器同步书架
+     */
+    @GET("http://10.0.2.2:8080/book/{userName}/download")
+    Observable<BookShelfResult> sync(@Path("userName")String userName);
+
+    /**
+     * 上传书架到服务器
+     * @param book
+     * @return
+     */
+    @POST("http://10.0.2.2:8080/book/upload")
+    Observable<BookShelfResult> uploadBookShelf(@Body BookShelfResult.Book book);
 }

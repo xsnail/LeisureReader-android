@@ -5,6 +5,7 @@ package com.xsnail.leisurereader.api;
 import com.xsnail.leisurereader.data.bean.AutoComplete;
 import com.xsnail.leisurereader.data.bean.BookDetail;
 import com.xsnail.leisurereader.data.bean.BookMixAToc;
+import com.xsnail.leisurereader.data.bean.BookShelfResult;
 import com.xsnail.leisurereader.data.bean.BooksByCats;
 import com.xsnail.leisurereader.data.bean.CategoryList;
 import com.xsnail.leisurereader.data.bean.ChapterRead;
@@ -14,9 +15,8 @@ import com.xsnail.leisurereader.data.bean.Disscussion;
 import com.xsnail.leisurereader.data.bean.HotReview;
 import com.xsnail.leisurereader.data.bean.LoginResult;
 import com.xsnail.leisurereader.data.bean.RecommendBookList;
+import com.xsnail.leisurereader.data.bean.RegisterResult;
 import com.xsnail.leisurereader.data.bean.SearchDetail;
-import com.xsnail.leisurereader.data.bean.UserBookShelf;
-
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
@@ -79,10 +79,6 @@ public class BookApi {
         return service.searchBooks(query);
     }
 
-    public Observable<UserBookShelf> getUserBookShelf(LoginResult loginResult) {
-        return service.getUserBookShelf(loginResult);
-    }
-
     public Observable<BookMixAToc> getBookMixAToc(String bookId, String view) {
         return service.getBookMixAToc(bookId, view);
     }
@@ -115,5 +111,24 @@ public class BookApi {
 
     public Observable<HotReview> getBookDetailReviewList(String book, String sort, String start, String limit) {
         return service.getBookDetailReviewList(book, sort, start, limit);
+    }
+
+    //登陆
+    public Observable<LoginResult> login(LoginResult.User user){
+        return service.login(user);
+    }
+
+    //注册
+    public Observable<RegisterResult> register(LoginResult.User user){
+        return service.register(user);
+    }
+
+    //同步
+    public Observable<BookShelfResult> sync(String userName){
+        return service.sync(userName);
+    }
+
+    public Observable<BookShelfResult> uploadBookShelf(BookShelfResult.Book book) {
+        return service.uploadBookShelf(book);
     }
 }

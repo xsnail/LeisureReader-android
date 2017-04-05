@@ -32,7 +32,6 @@
 
     <string-array name="recommend_item_long_click_choice">
         <item>置顶</item>
-        <item>缓存全本</item>
         <item>删除</item>
     </string-array>
 
