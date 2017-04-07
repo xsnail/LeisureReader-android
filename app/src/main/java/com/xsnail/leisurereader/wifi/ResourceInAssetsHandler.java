@@ -25,14 +25,14 @@ public class ResourceInAssetsHandler implements IResourceUrlHandler {
 
     @Override
     public boolean accept(String uri) {
-        return true;
+        return uri.startsWith(acceptPrefix);
     }
 
     @Override
     public void handle(String uri, HttpContext httpContext) throws IOException {
-//        int startIndex = acceptPrefix.length();
-//        String assetsPath = uri.substring(startIndex);
-        String assetsPath = "upload/index.html";
+        int startIndex = acceptPrefix.length();
+        String assetsPath = uri.substring(startIndex);
+//        String assetsPath = "upload/index.html";
         InputStream fis = context.getAssets().open(assetsPath);
         byte[] raw = StreamUtils.readRawFromStream(fis);
         fis.close();

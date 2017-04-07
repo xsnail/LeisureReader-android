@@ -15,6 +15,10 @@ public class HttpContext {
 
     private Socket underlySocket;
 
+    public HashMap<String, String> getRequestHeaders() {
+        return requestHeaders;
+    }
+
     public void setUnderlySocket(Socket underlySocket) {
         this.underlySocket = underlySocket;
     }

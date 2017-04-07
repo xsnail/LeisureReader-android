@@ -68,13 +68,21 @@ public class WifiActivity extends BaseActivity<WifiPresenterImpl> implements Wif
 
     @Override
     public void initToolBar() {
-
+        mCommonToolbar.setTitle("wifi传书");
+        mCommonToolbar.setNavigationIcon(R.drawable.ab_back);
     }
 
     @Override
     public void showWifiInfo(String wifiName, String wifiIp) {
+        if (wifiName == null){
+            wifiName = "未知";
+        }
         mTvWifiName.setText(wifiName);
-        mTvWifiIp.setText("http://"+wifiIp+":"+WEB_CONFIG_PORT);
+        if(wifiIp == null){
+            mTvWifiIp.setText("请连接wifi");
+            return;
+        }
+        mTvWifiIp.setText("http://"+wifiIp+":"+WEB_CONFIG_PORT+"/upload/index.html");
     }
 
     @Override

@@ -45,6 +45,12 @@ public abstract class BaseActivity<T extends BaseContract.BasePresenter> extends
         if (mCommonToolbar != null) {
             initToolBar();
             setSupportActionBar(mCommonToolbar);
+            mCommonToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finish();
+                }
+            });
         }
 
         setViewToPresenter();

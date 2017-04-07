@@ -16,6 +16,7 @@ import com.xsnail.leisurereader.data.support.RefreshBookShelfEvent;
 import com.xsnail.leisurereader.di.components.AppComponent;
 import com.xsnail.leisurereader.di.components.DaggerBookShelfComponent;
 import com.xsnail.leisurereader.manager.CollectionsManager;
+import com.xsnail.leisurereader.manager.EventManager;
 import com.xsnail.leisurereader.mvp.contract.BookShelfContract;
 import com.xsnail.leisurereader.mvp.presenter.impl.BookShelfPresenterImpl;
 import com.xsnail.leisurereader.ui.activity.BookReadActivity;
@@ -118,6 +119,7 @@ public class BookShelfFragment extends BaseRVFragment<BookShelfPresenterImpl,Rec
                         case 0:
                             //置顶、取消置顶
                             CollectionsManager.getInstance().top(mAdapter.getItem(position)._id, !isTop);
+                            EventManager.refreshCollectionList();
                             break;
                         case 1:
                             //删除
