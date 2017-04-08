@@ -5,12 +5,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,7 +25,6 @@ import com.xsnail.leisurereader.data.support.RefreshBookShelfEvent;
 import com.xsnail.leisurereader.data.support.RefreshCollectionListEvent;
 import com.xsnail.leisurereader.data.support.RefreshUserEvent;
 import com.xsnail.leisurereader.di.components.AppComponent;
-import com.xsnail.leisurereader.di.components.DaggerBookCityComponent;
 import com.xsnail.leisurereader.di.components.DaggerMainComponent;
 import com.xsnail.leisurereader.manager.EventManager;
 import com.xsnail.leisurereader.mvp.contract.MainContract;
@@ -107,19 +104,15 @@ public class MainActivity extends BaseActivity<MainPresenterImpl> implements Nav
     public void initSearchView(MaterialSearchView searchView) {
         searchView.setVoiceSearch(false);
         searchView.setCursorDrawable(R.drawable.color_cursor_white);
-//        searchView.setSuggestions(mContext.getResources().getStringArray(R.array.query_suggestions));
         searchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-//                Snackbar.make(findViewById(R.id.toolbar_container), "Query: " + query, Snackbar.LENGTH_LONG)
-//                        .show();
                 presenter.getSearchResultList(query);
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                //Do some magic
                 if(newText != null && !newText.isEmpty()) {
                     presenter.getQuerySuggestion(newText);
                 }
@@ -142,7 +135,6 @@ public class MainActivity extends BaseActivity<MainPresenterImpl> implements Nav
     }
 
     public void initHeader(View headerLayout) {
-//        LoginResult user= UserIntermediate.instance.getUser(context);
         mUserName = (TextView) headerLayout.findViewById(R.id.info_username);
         mUserMotto = (TextView) headerLayout.findViewById(R.id.info_phone);
         mAvatar=(SimpleDraweeView) headerLayout.findViewById(R.id.info_avatar);
@@ -302,6 +294,9 @@ public class MainActivity extends BaseActivity<MainPresenterImpl> implements Nav
                 break;
             case R.id.login_out:
                 loginout();
+                break;
+            case R.id.disclaimer:
+                DisclaimerActivity.startActivity(mContext);
                 break;
             case R.id.about_me:
                 Uri uri=Uri.parse("https://github.com/xsnail");

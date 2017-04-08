@@ -181,9 +181,8 @@ public class ScanLocalBookActivity extends BaseActivity implements RecyclerArray
                 }
             }).show();
         } else if (books.path.endsWith(Constant.SUFFIX_PDF)) {
-            //TODO
             // PDF
-//            ReadPDFActivity.start(this, books.path);
+            PdfReadActivity.startActivity(mContext,books.path,books.title);
         }
     }
 }

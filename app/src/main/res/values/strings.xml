@@ -4,6 +4,7 @@
     <string name="scan_local">导入本地书籍</string>
     <string name="about_me">关于我</string>
     <string name="logout">退出登录</string>
+    <string name="disclaimer">免责声明</string>
     <string name="info_others">其它</string>
     <string name="sync_shelf">同步书架</string>
     <string name="setting">设置</string>
@@ -54,5 +55,7 @@
     <string name="comment_reply_nickname">回复 %1$s</string>
 
     <string name="book_detail_is_joined_the_book_shelf">是否将《%1$s》加入书架</string>
+
+    <string name="disclaimer_text">本软件仅供学习交流，请勿用于商业及非法用途，作者不承担任何责任</string>
 
 </resources>

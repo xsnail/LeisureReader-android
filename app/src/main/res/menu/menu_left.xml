@@ -28,6 +28,11 @@
                 android:title="@string/logout" />
 
             <item
+                android:id="@+id/disclaimer"
+                android:icon="@drawable/disclaimer"
+                android:title="@string/disclaimer" />
+
+            <item
                 android:id="@+id/about_me"
                 android:icon="@drawable/menu_author"
                 android:title="@string/about_me" />

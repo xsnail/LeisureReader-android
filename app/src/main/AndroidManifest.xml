@@ -26,6 +26,8 @@
         <activity android:name=".ui.activity.LoginActivity"/>
         <activity android:name=".ui.activity.RegisterActivity"/>
         <activity android:name=".ui.activity.BookCommunityActivity"/>
+        <activity android:name=".ui.activity.DisclaimerActivity"/>
+        <activity android:name=".ui.activity.PdfReadActivity"/>
         <service android:name=".service.UploadBookShelfService"/>
         <service android:name=".service.DownloadBookService"/>
     </application>

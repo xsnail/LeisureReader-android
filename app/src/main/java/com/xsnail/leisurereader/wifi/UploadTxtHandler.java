@@ -37,10 +37,6 @@ public class UploadTxtHandler implements IResourceUrlHandler {
 
     @Override
     public void handle(String uri, HttpContext httpContext) throws IOException {
-        Map<String,String> map = httpContext.getRequestHeaders();
-        for(String s : map.keySet()){
-            Log.d("test",s +" "+ map.get(s));
-        }
         String length = httpContext.getRequestHeaderValue("Content-Length").replace("\r\n","").trim();
         String tmpPath = FileUtils.createRootPath(App.getInstance()) + "/hello.txt";
         File file = new File(tmpPath);
@@ -67,7 +63,6 @@ public class UploadTxtHandler implements IResourceUrlHandler {
         printer.println();
         printer.write("上传成功了".getBytes("UTF-8"));
         nos.close();
-
     }
 
     private void addToCollection(String fileName){
