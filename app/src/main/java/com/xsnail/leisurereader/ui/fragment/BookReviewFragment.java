@@ -82,7 +82,7 @@ public class BookReviewFragment extends BaseRVFragment<BookReviewPresenterImpl, 
     @Override
     public void onLoadMore() {
         super.onLoadMore();
-        mPresenter.getBookDetailReviewList(sort, type, start, limit);
+        mPresenter.getBookDetailReviewList(bookId, sort, start, limit);
     }
 
     @Override
