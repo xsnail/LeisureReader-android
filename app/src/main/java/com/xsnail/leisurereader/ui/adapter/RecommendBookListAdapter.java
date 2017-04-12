@@ -3,13 +3,16 @@ package com.xsnail.leisurereader.ui.adapter;
 
 import android.content.Context;
 import android.view.View;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.xsnail.leisurereader.R;
 import com.xsnail.leisurereader.common.NoDoubleClickListener;
 import com.xsnail.leisurereader.common.OnRvItemClickListener;
 import com.xsnail.leisurereader.data.bean.RecommendBookList;
 import com.xsnail.leisurereader.data.config.Constant;
 import com.xsnail.leisurereader.manager.SettingManager;
+import com.xsnail.leisurereader.view.glide.GlideRoundTransform;
 import com.yuyh.easyadapter.recyclerview.EasyRVAdapter;
 import com.yuyh.easyadapter.recyclerview.EasyRVHolder;
 
@@ -29,7 +32,9 @@ public class RecommendBookListAdapter extends EasyRVAdapter<RecommendBookList.Re
     @Override
     protected void onBindData(final EasyRVHolder holder, final int position, final RecommendBookList.RecommendBook item) {
         if (!SettingManager.getInstance().isNoneCover()) {
-            holder.setRoundImageUrl(R.id.ivBookListCover, Constant.IMG_BASE_URL + item.cover, R.drawable.cover_default);
+//            holder.setRoundImageUrl(R.id.ivBookListCover, Constant.IMG_BASE_URL + item.cover, R.drawable.cover_default);
+            ImageView view = holder.getView(R.id.ivBookListCover);
+            Glide.with(mContext).load(Constant.IMG_BASE_URL + item.cover).placeholder(R.drawable.cover_default) .transform(new GlideRoundTransform(mContext)).into(view);
         }
 
         holder.setText(R.id.tvBookListTitle, item.title)

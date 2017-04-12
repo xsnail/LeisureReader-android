@@ -14,6 +14,7 @@ import com.xsnail.leisurereader.base.BaseActivity;
 import com.xsnail.leisurereader.data.config.Constant;
 import com.xsnail.leisurereader.di.components.AppComponent;
 import com.xsnail.leisurereader.manager.CacheManager;
+import com.xsnail.leisurereader.manager.EventManager;
 import com.xsnail.leisurereader.manager.SettingManager;
 import com.xsnail.leisurereader.utils.SharedPreferencesUtil;
 
@@ -101,6 +102,7 @@ public class SettingActivity extends BaseActivity {
                                 mTvSort.setText(getResources().getStringArray(R.array.setting_dialog_sort_choice)[which]);
                                 SharedPreferencesUtil.getInstance().putBoolean(Constant.ISBYUPDATESORT, which == 0);
                                 dialog.dismiss();
+                                EventManager.refreshCollectionList();
                             }
                         })
                 .create().show();

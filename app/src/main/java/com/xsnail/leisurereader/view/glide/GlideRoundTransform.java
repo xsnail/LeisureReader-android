@@ -1,4 +1,4 @@
-package com.yuyh.easyadapter.glide;
+package com.xsnail.leisurereader.view.glide;
 
 import android.content.Context;
 import android.content.res.Resources;

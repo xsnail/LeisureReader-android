@@ -25,8 +25,8 @@ import com.xsnail.leisurereader.ui.adapter.CommentListAdapter;
 import com.xsnail.leisurereader.utils.FormatUtils;
 import com.xsnail.leisurereader.view.BookContentTextView;
 import com.xsnail.leisurereader.view.SupportDividerItemDecoration;
+import com.xsnail.leisurereader.view.glide.GlideCircleTransform;
 import com.xsnail.leisurereader.view.recyclerview.adapter.RecyclerArrayAdapter;
-import com.yuyh.easyadapter.glide.GlideCircleTransform;
 
 import java.util.ArrayList;
 import java.util.List;

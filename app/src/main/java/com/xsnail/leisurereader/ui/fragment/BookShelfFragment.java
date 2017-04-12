@@ -166,8 +166,7 @@ public class BookShelfFragment extends BaseRVFragment<BookShelfPresenterImpl,Rec
             };
         }
         if (isTop) items[0] = getString(R.string.cancle_top);
-        new AlertDialog.Builder(mContext
-        )
+        new AlertDialog.Builder(mContext)
                 .setTitle(mAdapter.getItem(position).title)
                 .setItems(items, listener)
                 .setNegativeButton(null, null)

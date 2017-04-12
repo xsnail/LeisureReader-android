@@ -70,41 +70,6 @@
         android:textColor="@color/common_h2"
         android:textSize="16dp" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="15dp">
-
-        <TextView
-            android:id="@+id/tvLike"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/shape_common_btn_selector"
-            android:gravity="center"
-            android:paddingBottom="5dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:paddingTop="5dp"
-            android:text="同感"
-            android:textColor="@color/colorPrimary"
-            android:textSize="12dp" />
-
-        <ImageView
-            android:id="@+id/ivMore"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_alignParentRight="true"
-            android:src="@drawable/post_detail_more" />
-
-        <ImageView
-            android:id="@+id/ivShare"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginRight="10dp"
-            android:layout_toLeftOf="@+id/ivMore"
-            android:src="@drawable/post_detail_share" />
-    </RelativeLayout>
-
     <TextView
         android:id="@+id/tvBestComments"
         android:layout_width="match_parent"

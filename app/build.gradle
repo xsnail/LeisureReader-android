@@ -6,7 +6,7 @@ android {
     buildToolsVersion "23.0.3"
     defaultConfig {
         applicationId "com.xsnail.leisurereader"
-        minSdkVersion 21
+        minSdkVersion 16
         targetSdkVersion 22
         versionCode 1
         versionName "1.0"
@@ -21,16 +21,17 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile project(':EasyAdapterLibrary')
     compile 'com.android.support:appcompat-v7:23.4.0'
     compile 'com.android.support:design:23.4.0'
     compile 'com.android.support:recyclerview-v7:23.0.1'
     //组件
     compile 'com.ashokvarma.android:bottom-navigation-bar:1.3.1'
     compile 'com.miguelcatalan:materialsearchview:1.4.0'
+    compile 'com.yuyh.easyadapter:library:1.1.1'
     //图片加载
     compile "com.facebook.fresco:fresco:${frescoVersion}"
     compile "com.facebook.fresco:animated-gif:${frescoVersion}"
+    compile 'com.github.bumptech.glide:glide:3.7.0'
     //依赖注入
     compile "com.google.dagger:dagger:${daggerVersion}"
     apt "com.google.dagger:dagger-compiler:${daggerVersion}"

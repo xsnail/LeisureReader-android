@@ -21,12 +21,9 @@ import com.xsnail.leisurereader.data.bean.HotReview;
 import com.xsnail.leisurereader.data.bean.Recommend;
 import com.xsnail.leisurereader.data.bean.RecommendBookList;
 import com.xsnail.leisurereader.data.config.Constant;
-import com.xsnail.leisurereader.data.support.RefreshBookShelfEvent;
 import com.xsnail.leisurereader.di.components.AppComponent;
 import com.xsnail.leisurereader.di.components.DaggerBookCityComponent;
-import com.xsnail.leisurereader.di.components.DaggerBookShelfComponent;
 import com.xsnail.leisurereader.manager.CollectionsManager;
-import com.xsnail.leisurereader.manager.EventManager;
 import com.xsnail.leisurereader.mvp.contract.BookDetailContract;
 import com.xsnail.leisurereader.mvp.presenter.impl.BookDetailPresenterImpl;
 import com.xsnail.leisurereader.ui.adapter.HotReviewAdapter;
@@ -36,16 +33,10 @@ import com.xsnail.leisurereader.utils.ToastUtils;
 import com.xsnail.leisurereader.view.DrawableCenterButton;
 import com.xsnail.leisurereader.view.TagColor;
 import com.xsnail.leisurereader.view.TagGroup;
-import com.yuyh.easyadapter.glide.GlideRoundTransform;
-
-import org.greenrobot.eventbus.EventBus;
+import com.xsnail.leisurereader.view.glide.GlideRoundTransform;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.inject.Inject;
-
-import butterknife.BindView;
 import butterknife.BindView;
 import butterknife.OnClick;
 

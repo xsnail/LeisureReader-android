@@ -86,15 +86,10 @@ public class BookReadActivity extends BaseActivity<BookReadPresenterImpl> implem
 
     @BindView(R.id.ivBack)
     ImageView mIvBack;
-//    @BindView(R.id.tvBookReadReading)
-//    TextView mTvBookReadReading;
     @BindView(R.id.tvBookReadCommunity)
     TextView mTvBookReadCommunity;
     @BindView(R.id.tvBookReadIntroduce)
     TextView mTvBookReadChangeSource;
-//    @BindView(R.id.tvBookReadSource)
-//    TextView mTvBookReadSource;
-
     @BindView(R.id.flReadWidget)
     FrameLayout flReadWidget;
 
@@ -441,8 +436,6 @@ public class BookReadActivity extends BaseActivity<BookReadPresenterImpl> implem
         }
     }
 
-    /***************Title Bar*****************/
-
     @OnClick(R.id.ivBack)
     public void onClickBack() {
         if (mTocListPopupWindow.isShowing()) {
@@ -452,18 +445,14 @@ public class BookReadActivity extends BaseActivity<BookReadPresenterImpl> implem
         }
     }
 
-//    @OnClick(R.id.tvBookReadReading)
-//    public void readBook() {
-//        gone(rlReadAaSet, rlReadMark);
-//        ToastUtils.showToast("正在拼命开发中...");
-//    }
-
+    //社区
     @OnClick(R.id.tvBookReadCommunity)
     public void onClickCommunity() {
         gone(rlReadAaSet, rlReadMark);
         BookCommunityActivity.startActivity(this, bookId, mTvBookReadTocTitle.getText().toString(), 0);
     }
 
+    //简介
     @OnClick(R.id.tvBookReadIntroduce)
     public void onClickIntroduce() {
         gone(rlReadAaSet, rlReadMark);
