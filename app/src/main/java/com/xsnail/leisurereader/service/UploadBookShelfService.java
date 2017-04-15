@@ -45,7 +45,7 @@ public class UploadBookShelfService extends Service {
         bookApi = App.getInstance().getAppComponent().getBookApi();
 
         Timer timer = new Timer();
-        timer.schedule(timerTask, 0, 3 * 1000);
+        timer.schedule(timerTask, 0, 5 * 60 * 1000);
 
     }
 

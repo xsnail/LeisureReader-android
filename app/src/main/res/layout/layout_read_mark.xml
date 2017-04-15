@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="190dp"
     android:layout_above="@+id/llBookReadBottom"
-    android:background="@color/reader_menu_bg_color"
+    android:background="@color/light_black"
     android:clickable="true"
     android:orientation="vertical"
     android:visibility="gone">

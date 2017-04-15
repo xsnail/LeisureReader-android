@@ -486,8 +486,8 @@ public class BookReadActivity extends BaseActivity<BookReadPresenterImpl> implem
 
         mTvBookReadMode.setText(getString(isNight ? R.string.book_read_mode_day_manual_setting
                 : R.string.book_read_mode_night_manual_setting));
-        Drawable drawable = ContextCompat.getDrawable(this, isNight ? R.drawable.ic_menu_mode_day_manual
-                : R.drawable.ic_menu_mode_night_manual);
+        Drawable drawable = ContextCompat.getDrawable(this, isNight ? R.drawable.ic_menu_mode_day_normal
+                : R.drawable.ic_menu_mode_night_normal);
         drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
         mTvBookReadMode.setCompoundDrawables(null, drawable, null, null);
 
