@@ -194,19 +194,19 @@ public interface BookApiService {
     /**
      * 登陆
      */
-    @POST("http://10.0.2.2:8080/user/login")
+    @POST(ApiConfig.MY_BASE_URL + "/user/login")
     Observable<LoginResult> login(@Body LoginResult.User user);
 
     /**
      * 注册
      */
-    @POST("http://10.0.2.2:8080/user/register")
+    @POST(ApiConfig.MY_BASE_URL+"/user/register")
     Observable<RegisterResult> register(@Body LoginResult.User user);
 
     /**
      * 从服务器同步书架
      */
-    @GET("http://10.0.2.2:8080/book/{userName}/download")
+    @GET(ApiConfig.MY_BASE_URL+"/book/{userName}/download")
     Observable<BookShelfResult> sync(@Path("userName")String userName);
 
     /**
@@ -214,6 +214,6 @@ public interface BookApiService {
      * @param book
      * @return
      */
-    @POST("http://10.0.2.2:8080/book/upload")
+    @POST(ApiConfig.MY_BASE_URL+"/book/upload")
     Observable<BookShelfResult> uploadBookShelf(@Body BookShelfResult.Book book);
 }
