@@ -52,7 +52,7 @@ public interface BookApiService {
 
     /**
      * 按书籍id获取书籍详情
-     * @param bookId
+     * @param bookId 50c54ad08380e4f81500002a
      * @return
      */
     @GET("/book/{bookId}")
@@ -60,7 +60,7 @@ public interface BookApiService {
 
     /**
      * 根据书籍id获取热门评论
-     * @param book 51d11e782de6405c45000068
+     * @param book 50c54ad08380e4f81500002a
      * @return
      */
     @GET("/post/review/best-by-book")
@@ -68,7 +68,7 @@ public interface BookApiService {
 
     /**
      * 根据书籍id获取推荐书单
-     * @param bookId 51d11e782de6405c45000068
+     * @param bookId 50c54ad08380e4f81500002a
      * @param limit
      * @return
      */
@@ -93,9 +93,10 @@ public interface BookApiService {
 
     /**
      * 根据书籍id获取章节内容
-     * @param bookId 51d11e782de6405c45000068
+     * @param bookId 50c54ad08380e4f81500002a
      * @param view  chapters
      * @return
+     * url: http://api.zhuishushenqi.com/mix-atoc/50c54ad08380e4f81500002a
      */
     @GET("/mix-atoc/{bookId}")
     Observable<BookMixAToc> getBookMixAToc(@Path("bookId") String bookId, @Query("view") String view);
@@ -105,6 +106,7 @@ public interface BookApiService {
      * 根据章节url获取章节内容
      * @param url
      * @return
+     * url: http://chapter2.zhuishushenqi.com/chapter/http:%2F%2Fbook.my716.com%2FgetBooks.aspx%3Fmethod=content&bookId=41894&chapterFile=1%2520%25E7%2596%25AF%25E7%258B%2582%25E5%25B9%25B4%25E4%25BB%25A31.txt&chinese
      */
     @GET("http://chapter2.zhuishushenqi.com/chapter/{url}")
     Observable<ChapterRead> getChapterRead(@Path("url") String url);

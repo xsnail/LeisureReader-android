@@ -5,9 +5,7 @@ import android.content.Intent;
 import android.os.IBinder;
 
 import com.xsnail.leisurereader.App;
-import com.xsnail.leisurereader.api.ApiConfig;
 import com.xsnail.leisurereader.api.BookApi;
-import com.xsnail.leisurereader.api.interceptor.HeaderInterceptor;
 import com.xsnail.leisurereader.data.bean.BookShelfResult;
 import com.xsnail.leisurereader.data.bean.Recommend;
 import com.xsnail.leisurereader.manager.CollectionsManager;
@@ -18,10 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.concurrent.TimeUnit;
-
-import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
 import rx.Observable;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;

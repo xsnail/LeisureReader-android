@@ -1,13 +1,9 @@
 package com.xsnail.leisurereader.di.components;
 
 import android.content.Context;
-
-
 import com.xsnail.leisurereader.api.BookApi;
 import com.xsnail.leisurereader.di.modules.AppModule;
 import com.xsnail.leisurereader.di.modules.BookApiModule;
-
-
 import dagger.Component;
 
 /**

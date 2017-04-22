@@ -27,7 +27,6 @@ public class BookApiModule {
                 .connectTimeout(ApiConfig.CONNECT_TIME_OUT, TimeUnit.MILLISECONDS)
                 .readTimeout(ApiConfig.READ_TIME_OUT, TimeUnit.MILLISECONDS)
                 .retryOnConnectionFailure(true)
-                .addInterceptor(new HeaderInterceptor())
                 .addInterceptor(loggingInterceptor);
         return builder.build();
     }

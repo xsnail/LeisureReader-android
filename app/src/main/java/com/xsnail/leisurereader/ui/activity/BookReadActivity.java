@@ -187,6 +187,7 @@ public class BookReadActivity extends BaseActivity<BookReadPresenterImpl> implem
 
     @Override
     public int getLayoutId() {
+        //设置窗体全屏
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 //        statusBarColor = ContextCompat.getColor(BookReadActivity.this, R.color.reader_menu_bg_color);
@@ -200,9 +201,9 @@ public class BookReadActivity extends BaseActivity<BookReadPresenterImpl> implem
     @Override
     public void initDatas() {
         recommendBooks = (Recommend.RecommendBooks) getIntent().getSerializableExtra(INTENT_BEAN);
-        bookId = recommendBooks._id;
         isFromSD = getIntent().getBooleanExtra(INTENT_SD, false);
 
+        //接收从外部文件打开intent
         if (Intent.ACTION_VIEW.equals(getIntent().getAction())) {
             String filePath = Uri.decode(getIntent().getDataString().replace("file://", ""));
             String fileName;
@@ -224,13 +225,19 @@ public class BookReadActivity extends BaseActivity<BookReadPresenterImpl> implem
 
             isFromSD = true;
         }
+
+        bookId = recommendBooks._id;
+
         showDialog();
 
         mTvBookReadTocTitle.setText(recommendBooks.title);
+
+        //系统电池，时间广播接收
         intentFilter.addAction(Intent.ACTION_BATTERY_CHANGED);
         intentFilter.addAction(Intent.ACTION_TIME_TICK);
 
         CollectionsManager.getInstance().setRecentReadingTime(bookId);
+
         Observable.timer(1000, TimeUnit.MILLISECONDS)
                 .subscribe(new Action1<Long>() {
                     @Override
@@ -302,7 +309,6 @@ public class BookReadActivity extends BaseActivity<BookReadPresenterImpl> implem
         ThemeManager.setReaderTheme(curTheme, mRlBookReadRoot);
 
         seekbarFontSize.setMax(10);
-        //int fontSizePx = SettingManager.getInstance().getReadFontSize(bookId);
         int fontSizePx = SettingManager.getInstance().getReadFontSize();
         int progress = (int) ((ScreenUtils.pxToDpInt(fontSizePx) - 12) / 1.7f);
         seekbarFontSize.setProgress(progress);
@@ -448,6 +454,10 @@ public class BookReadActivity extends BaseActivity<BookReadPresenterImpl> implem
     //社区
     @OnClick(R.id.tvBookReadCommunity)
     public void onClickCommunity() {
+        if(isFromSD){
+            ToastUtils.showToast("该书籍为本地书籍");
+            return;
+        }
         gone(rlReadAaSet, rlReadMark);
         BookCommunityActivity.startActivity(this, bookId, mTvBookReadTocTitle.getText().toString(), 0);
     }
@@ -455,6 +465,10 @@ public class BookReadActivity extends BaseActivity<BookReadPresenterImpl> implem
     //简介
     @OnClick(R.id.tvBookReadIntroduce)
     public void onClickIntroduce() {
+        if(isFromSD){
+            ToastUtils.showToast("该书籍为本地书籍");
+            return;
+        }
         gone(rlReadAaSet, rlReadMark);
         BookDetailActivity.startActivity(mContext, bookId);
     }
@@ -494,6 +508,7 @@ public class BookReadActivity extends BaseActivity<BookReadPresenterImpl> implem
         ThemeManager.setReaderTheme(curTheme, mRlBookReadRoot);
     }
 
+    //设置
     @OnClick(R.id.tvBookReadSettings)
     public void setting() {
         if (isVisible(mLlBookReadBottom)) {
@@ -506,6 +521,7 @@ public class BookReadActivity extends BaseActivity<BookReadPresenterImpl> implem
         }
     }
 
+    //下载
     @OnClick(R.id.tvBookReadDownload)
     public void downloadBook() {
         gone(rlReadAaSet);
@@ -532,6 +548,7 @@ public class BookReadActivity extends BaseActivity<BookReadPresenterImpl> implem
         builder.show();
     }
 
+    //书签
     @OnClick(R.id.tvBookMark)
     public void onClickMark() {
         if (isVisible(mLlBookReadBottom)) {
@@ -599,7 +616,7 @@ public class BookReadActivity extends BaseActivity<BookReadPresenterImpl> implem
         updateMark();
     }
 
-    /***************Book Mark*****************/
+
 
     @OnClick(R.id.tvAddMark)
     public void addBookMark() {

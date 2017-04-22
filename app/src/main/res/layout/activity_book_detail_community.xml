@@ -14,7 +14,7 @@
         android:layout_height="55dp"
         android:background="@color/colorPrimary"
         android:orientation="horizontal"
-        rvp:indicator_color="@color/common_bg"
+        rvp:indicator_color="@color/gender_select_male_normal"
         rvp:indicator_style="line"
         rvp:item_count="2"
         rvp:text_color_hightlight="@color/light_coffee"

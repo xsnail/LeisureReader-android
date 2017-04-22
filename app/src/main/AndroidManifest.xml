@@ -4,7 +4,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_app"
+        android:icon="@drawable/ic_app"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
@@ -19,7 +19,15 @@
         <activity android:name=".ui.activity.WifiActivity"/>
         <activity android:name=".ui.activity.CategoryDetailActivity"/>
         <activity android:name=".ui.activity.BookDetailActivity"/>
-        <activity android:name=".ui.activity.BookReadActivity"/>
+        <activity android:name=".ui.activity.BookReadActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="text/plain" />
+            </intent-filter>
+        </activity>
         <activity android:name=".ui.activity.DiscussionDetailActivity"/>
         <activity android:name=".ui.activity.SettingActivity"/>
         <activity android:name=".ui.activity.ScanLocalBookActivity"/>
