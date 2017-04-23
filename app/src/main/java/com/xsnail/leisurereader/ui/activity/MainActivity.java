@@ -71,39 +71,10 @@ public class MainActivity extends BaseActivity<MainPresenterImpl> implements Nav
     private TextView mUserMotto;
     private SimpleDraweeView mAvatar;
 
-    private long lastTotalRxBytes = 0;
-    private long lastTimeStamp = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        lastTotalRxBytes = getTotalRxBytes();
-        lastTimeStamp = System.currentTimeMillis();
-        new Timer().schedule(task, 1000, 10000); // 1s后启动任务，每2s执行一次
-    }
-
-    private long getTotalRxBytes() {
-        return TrafficStats.getUidRxBytes(getApplicationInfo().uid)==TrafficStats.UNSUPPORTED ? 0 :(TrafficStats.getTotalRxBytes()/1024);//转为KB
-    }
-
-    TimerTask task = new TimerTask() {
-        @Override
-        public void run() {
-            showNetSpeed();
-        }
-    };
-
-    private void showNetSpeed() {
-
-        long nowTotalRxBytes = getTotalRxBytes();
-        long nowTimeStamp = System.currentTimeMillis();
-        final long speed = ((nowTotalRxBytes - lastTotalRxBytes) * 1000 / (nowTimeStamp - lastTimeStamp));//毫秒转换
-
-        Log.d("test","speed is "+speed);
-        lastTimeStamp = nowTimeStamp;
-        lastTotalRxBytes = nowTotalRxBytes;
-
     }
 
     @Override

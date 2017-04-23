@@ -65,6 +65,17 @@ public class FileUtils {
         return file;
     }
 
+    public static File createWifiTranfesPdfFile(String fileName) {
+        LogUtils.i("wifi trans save " + fileName);
+        // 取文件名作为文件夹（bookid）
+        String absPath = AppConfig.PATH_TXT + "/" + fileName + "/1.pdf";
+
+        File file = new File(absPath);
+        if (!file.exists())
+            createFile(file);
+        return file;
+    }
+
 
     public static String getPathOPF(String unzipDir) {
         String mPathOPF = "";

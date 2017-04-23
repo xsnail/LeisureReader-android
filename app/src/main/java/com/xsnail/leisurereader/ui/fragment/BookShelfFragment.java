@@ -12,7 +12,6 @@ import com.xsnail.leisurereader.R;
 import com.xsnail.leisurereader.base.BaseRVFragment;
 import com.xsnail.leisurereader.data.bean.BookMixAToc;
 import com.xsnail.leisurereader.data.bean.Recommend;
-import com.xsnail.leisurereader.data.support.RefreshBookShelfEvent;
 import com.xsnail.leisurereader.di.components.AppComponent;
 import com.xsnail.leisurereader.di.components.DaggerBookShelfComponent;
 import com.xsnail.leisurereader.manager.CollectionsManager;
@@ -21,13 +20,9 @@ import com.xsnail.leisurereader.mvp.contract.BookShelfContract;
 import com.xsnail.leisurereader.mvp.presenter.impl.BookShelfPresenterImpl;
 import com.xsnail.leisurereader.ui.activity.BookReadActivity;
 import com.xsnail.leisurereader.ui.activity.MainActivity;
+import com.xsnail.leisurereader.ui.activity.PdfReadActivity;
 import com.xsnail.leisurereader.ui.adapter.RecommendAdapter;
 import com.xsnail.leisurereader.view.recyclerview.adapter.RecyclerArrayAdapter;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -92,7 +87,14 @@ public class BookShelfFragment extends BaseRVFragment<BookShelfPresenterImpl,Rec
 
     @Override
     public void onItemClick(int position) {
-        BookReadActivity.startActivity(mContext, mAdapter.getItem(position), mAdapter.getItem(position).isFromSD);
+        Recommend.RecommendBooks recommendBooks = mAdapter.getItem(position);
+        if(recommendBooks.path.endsWith(".pdf") && recommendBooks.isFromSD){
+//            int length = recommendBooks._id.length();
+//            String pdfName = recommendBooks._id.substring(0,length-4);
+            PdfReadActivity.startActivity(mContext,recommendBooks.path,recommendBooks._id);
+            return;
+        }
+        BookReadActivity.startActivity(mContext, recommendBooks, mAdapter.getItem(position).isFromSD);
     }
 
     @Override
