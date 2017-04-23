@@ -37,7 +37,6 @@ public class BookReviewFragment extends BaseRVFragment<BookReviewPresenterImpl, 
     private String bookId;
 
     private String sort = "updated";
-    private String type = "all";
 
     @Override
     protected void setupActivityComponent(AppComponent appComponent) {

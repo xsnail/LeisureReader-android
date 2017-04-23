@@ -2,6 +2,7 @@ package com.xsnail.leisurereader.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.util.Log;
 
 import com.xsnail.leisurereader.R;
@@ -22,16 +23,12 @@ import es.voghdev.pdfviewpager.library.adapter.PDFPagerAdapter;
 public class PdfReadActivity extends BaseActivity {
     @BindView(R.id.pdfViewPager)
     PDFViewPager pdfViewPager;
-    public static final String PDF_PATH = "";
-    public static final String PDF_NAME = "";
-    private String pdfPath;
-    private String pdfName;
     private PDFPagerAdapter pdfPagerAdapter;
 
-    public static void startActivity(Context context,String pdfPath,String pdfName){
-        Intent intent = new Intent(context,PdfReadActivity.class);
-        intent.putExtra(PDF_PATH,pdfPath);
-        intent.putExtra(PDF_NAME,pdfName);
+    public static void startActivity(Context context,String pdfPath){
+        Intent intent = new Intent(context, PdfReadActivity.class);
+        intent.setAction(Intent.ACTION_VIEW);
+        intent.setData(Uri.fromFile(new File(pdfPath)));
         context.startActivity(intent);
     }
 
@@ -42,8 +39,8 @@ public class PdfReadActivity extends BaseActivity {
 
     @Override
     public void initToolBar() {
-        pdfPath = getIntent().getStringExtra(PDF_PATH);
-        pdfName = getIntent().getStringExtra(PDF_NAME);
+        String filePath = Uri.decode(getIntent().getDataString().replace("file://", ""));
+        String pdfName = filePath.substring(filePath.lastIndexOf("/") + 1, filePath.lastIndexOf("."));
         mCommonToolbar.setTitle(pdfName);
         mCommonToolbar.setNavigationIcon(R.drawable.ab_back);
     }
@@ -54,14 +51,12 @@ public class PdfReadActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        Log.d("test",getPdfPathOnSDCard(pdfPath));
-        pdfPagerAdapter = new PDFPagerAdapter(mContext,getPdfPathOnSDCard(pdfPath));
+        String filePath = "";
+        if (Intent.ACTION_VIEW.equals(getIntent().getAction())) {
+            filePath = Uri.decode(getIntent().getDataString().replace("file://", ""));
+        }
+        pdfPagerAdapter = new PDFPagerAdapter(mContext,filePath);
         pdfViewPager.setAdapter(pdfPagerAdapter);
-    }
-
-    protected String getPdfPathOnSDCard(String pdfPath) {
-        File f = new File(getExternalFilesDir("pdf"), pdfPath+".pdf");
-        return f.getAbsolutePath();
     }
 
     @Override
