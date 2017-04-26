@@ -67,8 +67,8 @@ public class MainPresenterImpl extends RxPresenterImpl<MainContract.MainView> im
                     @Override
                     public void onNext(BookShelfResult data) {
                         if (data != null && mView != null && data.ok == true) {
-                            LogUtils.d(data.toString());
-                            if(data.data.bookIdList != null && data.data.bookIdList.size() > 0) {
+                            mView.showSysncSucceed(data.error);
+                            if(data.data != null && data.data.bookIdList != null && data.data.bookIdList.size() > 0) {
                                 List<Recommend.RecommendBooks> recommendBookses = CollectionsManager.getInstance().getCollectionList();
                                 CollectionsManager.getInstance().removeSome(recommendBookses,true);
                                 for (String bookId : data.data.bookIdList) {

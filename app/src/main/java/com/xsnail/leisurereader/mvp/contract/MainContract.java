@@ -13,7 +13,7 @@ public interface MainContract {
     interface MainView extends BaseContract.BaseView{
         void showAutoCompleteList(List<String> list);
         void showSearchResultList(List<SearchDetail.SearchBooks> list);
-        void showSysncSucceed();
+        void showSysncSucceed(String error);
         void showSyncFailed(String error);
     }
 

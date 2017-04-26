@@ -349,8 +349,8 @@ public class MainActivity extends BaseActivity<MainPresenterImpl> implements Nav
     }
 
     @Override
-    public void showSysncSucceed() {
-        ToastUtils.showToast("同步成功");
+    public void showSysncSucceed(String error) {
+        ToastUtils.showToast(error);
     }
 
     @Override
