@@ -35,7 +35,7 @@ public class WifiPresenterImpl extends BasePresenterImpl<WifiContract.WifiView> 
         server = new SimpleHttpServer(webConfig);
         server.registResourceHandler(new ResourceInAssetsHandler(mContext));
         server.registResourceHandler(new UploadTxtHandler());
-        server.registResourceHandler(new UploadPdfHandler());
+//        server.registResourceHandler(new UploadPdfHandler());
         server.startAsync();
     }
 
