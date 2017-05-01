@@ -137,27 +137,6 @@ public class SettingManager {
         return SharedPreferencesUtil.getInstance().getObject(getBookMarksKey(bookId), ArrayList.class);
     }
 
-
-//    public boolean addBookMark(String bookId, BookMark mark) {
-//        List<BookMark> marks = SharedPreferencesUtil.getInstance().getObject(getBookMarksKey(bookId), ArrayList.class);
-//        if (marks != null && marks.size() > 0) {
-//            for (BookMark item : marks) {
-//                if (item.chapter == mark.chapter && item.startPos == mark.startPos) {
-//                    return false;
-//                }
-//            }
-//        } else {
-//            marks = new ArrayList<>();
-//        }
-//        marks.add(mark);
-//        SharedPreferencesUtil.getInstance().putObject(getBookMarksKey(bookId), marks);
-//        return true;
-//    }
-
-//    public List<BookMark> getBookMarks(String bookId) {
-//        return SharedPreferencesUtil.getInstance().getObject(getBookMarksKey(bookId), ArrayList.class);
-//    }
-
     public void clearBookMarks(String bookId) {
         SharedPreferencesUtil.getInstance().remove(getBookMarksKey(bookId));
     }
@@ -169,13 +148,6 @@ public class SettingManager {
     public void saveReadTheme(int theme) {
         SharedPreferencesUtil.getInstance().putInt("readTheme", theme);
     }
-
-//    public int getReadTheme() {
-//        if (SharedPreferencesUtil.getInstance().getBoolean(Constant.ISNIGHT, false)) {
-//            return ThemeManager.NIGHT;
-//        }
-//        return SharedPreferencesUtil.getInstance().getInt("readTheme", 3);
-//    }
 
     /**
      * 是否可以使用音量键翻页
@@ -196,28 +168,6 @@ public class SettingManager {
 
     public boolean isAutoBrightness() {
         return SharedPreferencesUtil.getInstance().getBoolean("autoBrightness", false);
-    }
-
-    /**
-     * 保存用户选择的性别
-     *
-     * @param sex male female
-     */
-    public void saveUserChooseSex(String sex) {
-        SharedPreferencesUtil.getInstance().putString("userChooseSex", sex);
-    }
-
-    /**
-     * 获取用户选择性别
-     *
-     * @return
-     */
-    public String getUserChooseSex() {
-        return SharedPreferencesUtil.getInstance().getString("userChooseSex", "male");
-    }
-
-    public boolean isUserChooseSex() {
-        return SharedPreferencesUtil.getInstance().exists("userChooseSex");
     }
 
     public boolean isNoneCover() {

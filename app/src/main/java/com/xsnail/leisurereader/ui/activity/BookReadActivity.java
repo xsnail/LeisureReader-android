@@ -31,7 +31,6 @@ import android.widget.TextView;
 
 import com.xsnail.leisurereader.R;
 import com.xsnail.leisurereader.base.BaseActivity;
-import com.xsnail.leisurereader.data.bean.BookSource;
 import com.xsnail.leisurereader.data.bean.ChapterRead;
 import com.xsnail.leisurereader.data.config.Constant;
 import com.xsnail.leisurereader.data.support.BookMark;
@@ -89,7 +88,7 @@ public class BookReadActivity extends BaseActivity<BookReadPresenterImpl> implem
     @BindView(R.id.tvBookReadCommunity)
     TextView mTvBookReadCommunity;
     @BindView(R.id.tvBookReadIntroduce)
-    TextView mTvBookReadChangeSource;
+    TextView mTvBookReadIntroduce;
     @BindView(R.id.flReadWidget)
     FrameLayout flReadWidget;
 
@@ -190,7 +189,6 @@ public class BookReadActivity extends BaseActivity<BookReadPresenterImpl> implem
         //设置窗体全屏
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-//        statusBarColor = ContextCompat.getColor(BookReadActivity.this, R.color.reader_menu_bg_color);
         return R.layout.activity_read;
     }
 
@@ -299,7 +297,7 @@ public class BookReadActivity extends BaseActivity<BookReadPresenterImpl> implem
             @Override
             public void onDismiss() {
                 gone(mTvBookReadTocTitle);
-                visible(mTvBookReadCommunity, mTvBookReadChangeSource);
+                visible(mTvBookReadCommunity, mTvBookReadIntroduce);
             }
         });
     }
@@ -384,8 +382,13 @@ public class BookReadActivity extends BaseActivity<BookReadPresenterImpl> implem
         }
     }
 
+    /**
+     * 加载章节内容
+     * @param data
+     * @param chapter
+     */
     @Override
-    public synchronized void showChapterRead(ChapterRead.Chapter data, int chapter) { // 加载章节内容
+    public synchronized void showChapterRead(ChapterRead.Chapter data, int chapter) {
         if (data != null) {
             CacheManager.getInstance().saveChapterFile(bookId, chapter, data);
         }
@@ -444,10 +447,14 @@ public class BookReadActivity extends BaseActivity<BookReadPresenterImpl> implem
 
     @OnClick(R.id.ivBack)
     public void onClickBack() {
-        if (mTocListPopupWindow.isShowing()) {
+        if (mTocListPopupWindow != null && mTocListPopupWindow.isShowing()) {
             mTocListPopupWindow.dismiss();
         } else {
-            finish();
+            if (!CollectionsManager.getInstance().isCollected(bookId)) {
+                showJoinBookShelfDialog(recommendBooks);
+            }else{
+                finish();
+            }
         }
     }
 
@@ -473,9 +480,9 @@ public class BookReadActivity extends BaseActivity<BookReadPresenterImpl> implem
         BookDetailActivity.startActivity(mContext, bookId);
     }
 
-
+    // 日/夜间模式切换
     @OnClick(R.id.tvBookReadMode)
-    public void onClickChangeMode() { // 日/夜间模式切换
+    public void onClickChangeMode() {
         gone(rlReadAaSet, rlReadMark);
 
         boolean isNight = !SharedPreferencesUtil.getInstance().getBoolean(Constant.ISNIGHT, false);
@@ -564,12 +571,13 @@ public class BookReadActivity extends BaseActivity<BookReadPresenterImpl> implem
         }
     }
 
+    //章节列表PopupWindow
     @OnClick(R.id.tvBookReadToc)
     public void onClickToc() {
         gone(rlReadAaSet, rlReadMark);
         if (!mTocListPopupWindow.isShowing()) {
             visible(mTvBookReadTocTitle);
-            gone(mTvBookReadCommunity, mTvBookReadChangeSource);
+            gone(mTvBookReadCommunity, mTvBookReadIntroduce);
             mTocListPopupWindow.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);
             mTocListPopupWindow.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
             mTocListPopupWindow.show();
@@ -579,6 +587,7 @@ public class BookReadActivity extends BaseActivity<BookReadPresenterImpl> implem
     }
 
 
+    //调节亮度->减小
     @OnClick(R.id.ivBrightnessMinus)
     public void brightnessMinus() {
         int curBrightness = SettingManager.getInstance().getReadBrightness();
@@ -589,6 +598,7 @@ public class BookReadActivity extends BaseActivity<BookReadPresenterImpl> implem
         }
     }
 
+    //调节亮度->增加
     @OnClick(R.id.ivBrightnessPlus)
     public void brightnessPlus() {
         int curBrightness = SettingManager.getInstance().getReadBrightness();
@@ -599,16 +609,19 @@ public class BookReadActivity extends BaseActivity<BookReadPresenterImpl> implem
         }
     }
 
+    //字体->减小
     @OnClick(R.id.tvFontsizeMinus)
     public void fontsizeMinus() {
         calcFontSize(seekbarFontSize.getProgress() - 1);
     }
 
+    //字体->增加
     @OnClick(R.id.tvFontsizePlus)
     public void fontsizePlus() {
         calcFontSize(seekbarFontSize.getProgress() + 1);
     }
 
+    //清除书签
     @OnClick(R.id.tvClear)
     public void clearBookMark() {
         SettingManager.getInstance().clearBookMarks(bookId);
@@ -617,7 +630,7 @@ public class BookReadActivity extends BaseActivity<BookReadPresenterImpl> implem
     }
 
 
-
+    //添加书签
     @OnClick(R.id.tvAddMark)
     public void addBookMark() {
         int[] readPos = mPageWidget.getReadPos();
@@ -637,6 +650,7 @@ public class BookReadActivity extends BaseActivity<BookReadPresenterImpl> implem
         }
     }
 
+    //更新书签
     private void updateMark() {
         if (mMarkAdapter == null) {
             mMarkAdapter = new BookMarkAdapter(this, new ArrayList<BookMark>());
@@ -725,28 +739,12 @@ public class BookReadActivity extends BaseActivity<BookReadPresenterImpl> implem
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        switch (requestCode) {
-            case 1:
-                if(resultCode == RESULT_OK) {
-                    BookSource bookSource = (BookSource) data.getSerializableExtra("source");
-                    bookId = bookSource._id;
-                }
-                //mPresenter.getBookMixAToc(bookId, "chapters");
-                break;
-            default:
-                break;
-        }
-    }
-
-    @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         switch (keyCode) {
             case KeyEvent.KEYCODE_BACK:
                 if (mTocListPopupWindow != null && mTocListPopupWindow.isShowing()) {
                     mTocListPopupWindow.dismiss();
-                    gone(mTvBookReadTocTitle);
-                    visible(mTvBookReadCommunity, mTvBookReadChangeSource);
+                    visible(mTvBookReadTocTitle,mTvBookReadCommunity, mTvBookReadIntroduce);
                     return true;
                 } else if (isVisible(rlReadAaSet)) {
                     gone(rlReadAaSet);
@@ -762,16 +760,6 @@ public class BookReadActivity extends BaseActivity<BookReadPresenterImpl> implem
             case KeyEvent.KEYCODE_MENU:
                 toggleReadBar();
                 return true;
-            case KeyEvent.KEYCODE_VOLUME_DOWN:
-                if (SettingManager.getInstance().isVolumeFlipEnable()) {
-                    return true;
-                }
-                break;
-            case KeyEvent.KEYCODE_VOLUME_UP:
-                if (SettingManager.getInstance().isVolumeFlipEnable()) {
-                    return true;
-                }
-                break;
             default:
                 break;
         }
@@ -909,8 +897,10 @@ public class BookReadActivity extends BaseActivity<BookReadPresenterImpl> implem
                 if (Intent.ACTION_BATTERY_CHANGED.equals(intent.getAction())) {
                     int level = intent.getIntExtra("level", 0);
                     mPageWidget.setBattery(100 - level);
+                    LogUtils.d("test","电池:"+(100 - level));
                 } else if (Intent.ACTION_TIME_TICK.equals(intent.getAction())) {
                     mPageWidget.setTime(sdf.format(new Date()));
+                    LogUtils.d("test","时间:"+sdf.format(new Date()));
                 }
             }
         }

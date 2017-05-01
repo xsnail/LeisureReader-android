@@ -56,11 +56,13 @@ public class BookDiscussionAdapter extends RecyclerArrayAdapter<DiscussionList.P
                         textView.setCompoundDrawables(drawable, null, null, null);
                     }
 
+                    //热门
                     if (TextUtils.equals(item.state, "hot")) {
                         holder.setVisible(R.id.tvHot, true);
                         holder.setVisible(R.id.tvTime, false);
                         holder.setVisible(R.id.tvDistillate, false);
                     } else if (TextUtils.equals(item.state, "distillate")) {
+                        //精品
                         holder.setVisible(R.id.tvDistillate, true);
                         holder.setVisible(R.id.tvHot, false);
                         holder.setVisible(R.id.tvTime, false);

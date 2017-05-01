@@ -28,8 +28,7 @@ public abstract class BaseActivity<T extends BaseContract.BasePresenter> extends
     public Toolbar mCommonToolbar;
     protected Context mContext;
     private CustomDialog dialog;
-    protected View statusBarView = null;
-    protected int statusBarColor = 0;
+
     @Inject
     protected T presenter;
 
@@ -140,17 +139,11 @@ public abstract class BaseActivity<T extends BaseContract.BasePresenter> extends
         WindowManager.LayoutParams attrs = getWindow().getAttributes();
         attrs.flags |= WindowManager.LayoutParams.FLAG_FULLSCREEN;
         getWindow().setAttributes(attrs);
-        if(statusBarView != null){
-            statusBarView.setBackgroundColor(Color.TRANSPARENT);
-        }
     }
 
     protected void showStatusBar() {
         WindowManager.LayoutParams attrs = getWindow().getAttributes();
         attrs.flags &= ~WindowManager.LayoutParams.FLAG_FULLSCREEN;
         getWindow().setAttributes(attrs);
-        if(statusBarView != null){
-            statusBarView.setBackgroundColor(statusBarColor);
-        }
     }
 }

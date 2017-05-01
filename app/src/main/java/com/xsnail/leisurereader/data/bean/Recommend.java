@@ -3,10 +3,7 @@ package com.xsnail.leisurereader.data.bean;
 import java.io.Serializable;
 import java.util.List;
 
-/**
- * @author yuyh.
- * @date 2016/8/4.
- */
+
 public class Recommend extends Base {
 
     public List<RecommendBooks> books;
@@ -30,18 +27,11 @@ public class Recommend extends Base {
         public String _id;
         public String author;
         public String cover;
-        public String shortIntro;
         public String title;
-        public boolean hasCp;
         public boolean isTop = false;
-        public boolean isSeleted = false;
-        public boolean showCheckBox = false;
         public boolean isFromSD = false;
         public String path = "";
-        public int latelyFollower;
-        public double retentionRatio;
         public String updated = "";
-        public int chaptersCount;
         public String lastChapter;
         public String recentReadingTime = "";
 

@@ -39,7 +39,6 @@ public class RecommendAdapter extends RecyclerArrayAdapter<Recommend.RecommendBo
                         .setText(R.id.tvLatelyUpdate, latelyUpdate)
                         .setText(R.id.tvRecommendShort, item.lastChapter)
                         .setVisible(R.id.ivTopLabel, item.isTop)
-                        .setVisible(R.id.ckBoxSelect, item.showCheckBox)
                         .setVisible(R.id.ivUnReadDot, FormatUtils.formatZhuiShuDateString(item.updated)
                                 .compareTo(item.recentReadingTime) > 0);
 
@@ -60,16 +59,6 @@ public class RecommendAdapter extends RecyclerArrayAdapter<Recommend.RecommendBo
                 } else {
                     holder.setImageResource(R.id.ivRecommendCover, R.drawable.cover_default);
                 }
-
-                CheckBox ckBoxSelect = holder.getView(R.id.ckBoxSelect);
-                ckBoxSelect.setChecked(item.isSeleted);
-                ckBoxSelect.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton buttonView,
-                                                 boolean isChecked) {
-                        item.isSeleted = isChecked;
-                    }
-                });
             }
         };
     }

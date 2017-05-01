@@ -303,4 +303,9 @@ public class BookDetailActivity extends BaseActivity<BookDetailPresenterImpl> im
     public void read(){
         BookReadActivity.startActivity(mContext,recommendBooks);
     }
+
+    @OnClick(R.id.rlCommunity)
+    public void jumpBookCommunity(){
+        BookCommunityActivity.startActivity(mContext,bookId,recommendBooks.title,0);
+    }
 }

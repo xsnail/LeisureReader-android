@@ -33,8 +33,8 @@ public class WifiPresenterImpl extends BasePresenterImpl<WifiContract.WifiView> 
         webConfig.setPort(port);
         webConfig.setMaxParallels(maxParallels);
         server = new SimpleHttpServer(webConfig);
-        server.registResourceHandler(new ResourceInAssetsHandler(mContext));
-        server.registResourceHandler(new UploadTxtHandler());
+        server.registerResourceHandler(new ResourceInAssetsHandler(mContext));
+        server.registerResourceHandler(new UploadTxtHandler());
 //        server.registResourceHandler(new UploadPdfHandler());
         server.startAsync();
     }

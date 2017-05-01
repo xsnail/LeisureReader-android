@@ -45,7 +45,6 @@ public class DiscussionList extends Base {
         public String updated;
         public String created;
         public int commentCount;
-        public int voteCount;
 
         public static class AuthorBean {
             public String _id;
