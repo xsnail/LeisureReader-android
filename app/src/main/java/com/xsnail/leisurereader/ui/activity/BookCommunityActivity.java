@@ -1,23 +1,17 @@
 package com.xsnail.leisurereader.ui.activity;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AlertDialog;
-import android.view.Menu;
-import android.view.MenuItem;
 
+import com.flyco.tablayout.SlidingTabLayout;
 import com.xsnail.leisurereader.R;
 import com.xsnail.leisurereader.base.BaseActivity;
 import com.xsnail.leisurereader.di.components.AppComponent;
 import com.xsnail.leisurereader.ui.fragment.BookCommunityFragment;
 import com.xsnail.leisurereader.ui.fragment.BookReviewFragment;
-import com.xsnail.leisurereader.view.RVPIndicator;
-
-import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -46,7 +40,8 @@ public class BookCommunityActivity extends BaseActivity {
     private int index;
 
     @BindView(R.id.indicatorSubRank)
-    RVPIndicator mIndicator;
+    SlidingTabLayout mIndicator;
+
     @BindView(R.id.viewpagerSubRank)
     ViewPager mViewPager;
 
@@ -93,10 +88,10 @@ public class BookCommunityActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        mIndicator.setTabItemTitles(mDatas);
+//        mIndicator.setTabItemTitles(mDatas);
         mViewPager.setAdapter(mAdapter);
         mViewPager.setOffscreenPageLimit(2);
-        mIndicator.setViewPager(mViewPager, index);
+        mIndicator.setViewPager(mViewPager, (String[]) mDatas.toArray());
     }
 
     @Override

@@ -28,16 +28,6 @@
         <enum name="triangle" value="3" />
     </attr>
 
-    <!-- RVPIndicator -->
-    <declare-styleable name="RVPIndicator">
-        <attr name="item_count" />
-        <attr name="text_color_normal" />
-        <attr name="text_color_hightlight" />
-        <attr name="text_size" />
-        <attr name="indicator_color" />
-        <attr name="indicator_src" />
-        <attr name="indicator_style" />
-    </declare-styleable>
 
     <declare-styleable name="TagGroup">
         <attr name="atg_isAppendMode" format="boolean" />

@@ -1,9 +1,6 @@
 package com.xsnail.leisurereader.view.readview;
 
-/**
- * @author yuyh.
- * @date 2016/11/15.
- */
+
 public enum BookStatus {
 
     NO_PRE_PAGE,

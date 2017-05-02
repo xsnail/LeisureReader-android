@@ -15,10 +15,7 @@
  */
 package com.xsnail.leisurereader.view.readview;
 
-/**
- * @author yuyh.
- * @date 2016/9/21.
- */
+
 public interface OnReadStateChangeListener {
 
     void onChapterChanged(int chapter);

@@ -18,10 +18,6 @@ import com.xsnail.leisurereader.utils.ToastUtils;
 
 import java.util.List;
 
-/**
- * @author yuyh.
- * @date 2016/10/18.
- */
 public abstract class BaseReadView extends View {
 
     protected int mScreenWidth;
@@ -67,6 +63,7 @@ public abstract class BaseReadView extends View {
                 pagefactory.setBgBitmap(ThemeManager.getThemeDrawable(theme));
                 // 自动跳转到上次阅读位置
                 int pos[] = SettingManager.getInstance().getReadProgress(bookId);
+                //章节，new int[]{开始位置，结束位置}
                 int ret = pagefactory.openBook(pos[0], new int[]{pos[1], pos[2]});
                 LogUtils.i("上次阅读位置：chapter=" + pos[0] + " startPos=" + pos[1] + " endPos=" + pos[2]);
                 if (ret == 0) {

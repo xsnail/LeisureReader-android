@@ -6,11 +6,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 
+import com.flyco.tablayout.SlidingTabLayout;
 import com.xsnail.leisurereader.R;
 import com.xsnail.leisurereader.base.BaseActivity;
 import com.xsnail.leisurereader.di.components.AppComponent;
 import com.xsnail.leisurereader.ui.fragment.CategoryDetailFragment;
-import com.xsnail.leisurereader.view.RVPIndicator;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -33,8 +33,11 @@ public class CategoryDetailActivity extends BaseActivity{
     private List<Fragment> mTabContents;
     private FragmentPagerAdapter mAdapter;
 
+//    @BindView(R.id.indicatorSub)
+//    RVPIndicator mIndicator;
+
     @BindView(R.id.indicatorSub)
-    RVPIndicator mIndicator;
+    SlidingTabLayout mIndicator;
     @BindView(R.id.viewpagerSub)
     ViewPager mViewPager;
 
@@ -84,10 +87,9 @@ public class CategoryDetailActivity extends BaseActivity{
 
     @Override
     public void initView() {
-        mIndicator.setTabItemTitles(mDatas);
         mViewPager.setAdapter(mAdapter);
         mViewPager.setOffscreenPageLimit(4);
-        mIndicator.setViewPager(mViewPager, 0);
+        mIndicator.setViewPager(mViewPager, (String[]) mDatas.toArray());
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {

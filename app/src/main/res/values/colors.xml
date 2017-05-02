@@ -95,4 +95,6 @@
     <color name="gender_select_female_normal">#EEA9B8</color>
     <color name="gender_select_female_pressed">#EEA2AD</color>
 
+    <color name="read_textColor">#3B3A38</color>
+
 </resources>
