@@ -96,5 +96,6 @@
     <color name="gender_select_female_pressed">#EEA2AD</color>
 
     <color name="read_textColor">#3B3A38</color>
+    <color name="halfColorPrimary">#aa2C2C2C</color>
 
 </resources>

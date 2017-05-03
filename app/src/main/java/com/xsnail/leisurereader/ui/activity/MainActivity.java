@@ -35,6 +35,7 @@ import com.xsnail.leisurereader.service.DownloadBookService;
 import com.xsnail.leisurereader.service.UploadBookShelfService;
 import com.xsnail.leisurereader.ui.fragment.BookCityFragment;
 import com.xsnail.leisurereader.ui.fragment.BookShelfFragment;
+import com.xsnail.leisurereader.ui.fragment.BookShelfFragment2;
 import com.xsnail.leisurereader.ui.fragment.CommunityFragment;
 import com.xsnail.leisurereader.utils.LogUtils;
 import com.xsnail.leisurereader.utils.SharedPreferencesUtil;

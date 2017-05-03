@@ -12,6 +12,9 @@
         android:layout_height="match_parent"
         app:layout_empty = "@layout/bookshelf_empty_view"
         app:layout_progress="@layout/common_progress_view"
-        app:scrollbarStyle="insideOverlay"/>
+        app:scrollbarStyle="insideOverlay"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>
