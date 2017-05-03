@@ -207,6 +207,7 @@ public class PageFactory {
             y += mLineSpace + mNumFontSize;
             // 绘制阅读页面文字
             for (String line : mLines) {
+                LogUtils.d("test3",line);
                 y += mLineSpace;
                 if (line.endsWith("@")) {
                     canvas.drawText(line.substring(0, line.length() - 1), marginWidth, y, mPaint);
@@ -291,12 +292,13 @@ public class PageFactory {
             curEndPos += parabuffer.length;
             try {
                 strParagraph = new String(parabuffer, charset);
+                LogUtils.d("test1",strParagraph);
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
             strParagraph = strParagraph.replaceAll("\r\n", "  ")
                     .replaceAll("\n", " "); // 段落中的换行符去掉，绘制的时候再换行
-
+            LogUtils.d("test2",strParagraph);
             while (strParagraph.length() > 0) {
                 int paintSize = mPaint.breakText(strParagraph, true, mVisibleWidth, null);
                 lines.add(strParagraph.substring(0, paintSize));

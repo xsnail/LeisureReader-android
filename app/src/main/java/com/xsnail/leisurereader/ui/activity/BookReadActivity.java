@@ -256,10 +256,13 @@ public class BookReadActivity extends BaseActivity<BookReadPresenterImpl> implem
         params.topMargin = ScreenUtils.getStatusBarHeight(this) - 2;
         mLlBookReadTop.setLayoutParams(params);
 
+        //初始化章节popupwindow
         initTocList();
 
+        //初始化设置界面
         initAASet();
 
+        //初始化
         initPagerWidget();
 
         // 本地收藏  直接打开
