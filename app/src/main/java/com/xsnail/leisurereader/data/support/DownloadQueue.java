@@ -6,12 +6,7 @@ import com.xsnail.leisurereader.data.bean.BookMixAToc;
 import java.io.Serializable;
 import java.util.List;
 
-/**
- * 下载队列实体
- *
- * @author yuyh.
- * @date 16/8/13.
- */
+
 public class DownloadQueue implements Serializable {
 
     public String bookId;

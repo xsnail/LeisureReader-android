@@ -628,7 +628,6 @@ public class BookReadActivity extends BaseActivity<BookReadPresenterImpl> implem
     @OnClick(R.id.tvClear)
     public void clearBookMark() {
         SettingManager.getInstance().clearBookMarks(bookId);
-
         updateMark();
     }
 
